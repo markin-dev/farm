@@ -1,5 +1,7 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container mx-auto">
+    <HelloWorld />
+  </div>
 </template>
 
 <script>
