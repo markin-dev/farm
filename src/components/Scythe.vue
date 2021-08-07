@@ -1,16 +1,17 @@
 <template>
   <div
+    :style="scytheStyleObject"
     class="scythe"
     @click="onClick"
   >
     <div
+      :style="iconStyleObject"
       class="scythe__icon"
-      :class="classes"
     />
-
     <transition name="scythe__substrate">
       <div
         v-if="isSubstrate"
+        :style="iconStyleObject"
         class="scythe__substrate"
       />
     </transition>
@@ -19,11 +20,38 @@
 
 <script>
 export default {
+  props: {
+    size: {
+      type: Number,
+      default: 360,
+    },
+  },
+
   data() {
     return {
       isSubstrate: false,
-      classes: [],
     };
+  },
+
+  computed: {
+    scytheStyleObject() {
+      return {
+        width: `${this.size}px`,
+        height: `${this.size}px`,
+      };
+    },
+
+    iconStyleObject() {
+      const iconSize = this.size * 0.8;
+      const iconIndent = (this.size - iconSize) / 2;
+
+      return {
+        top: `${iconIndent}px`,
+        left: `${iconIndent}px`,
+        width: `${iconSize}px`,
+        height: `${iconSize}px`,
+      };
+    },
   },
 
   methods: {
@@ -41,15 +69,9 @@ export default {
 <style lang="scss" scoped>
 .scythe {
   position: relative;
-  width: 308px;
-  height: 308px;
 
   &__icon {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    width: 256px;
-    height: 256px;
     background-image: url('~@/assets/scythe.png');
     background-size: 80%;
     background-position: 50%;
@@ -70,10 +92,6 @@ export default {
 
   &__substrate {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    width: 256px;
-    height: 256px;
     background-color: $blue-200;
     border-radius: 50%;
 
