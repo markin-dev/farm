@@ -17,14 +17,11 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-airbnb": "^5.3.0",
-    "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "postcss": "^7.0.36",
     "sass": "^1.37.5",
-    "sass-loader": "^10.2.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
+    "sass-loader": "^10.2.0"
   },
   "eslintConfig": {
     "root": true,
