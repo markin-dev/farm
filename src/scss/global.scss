@@ -1,4 +1,13 @@
+@import './colors.scss';
+
 $test: #000;
+$lg: 1024px;
+
+@mixin lg {
+    @media (min-width: #{$lg}) {
+        @content;
+    }
+ }
 
 body * {
     font-family: sans-serif;

@@ -1,16 +1,22 @@
 <template>
-  <div class="container mx-auto">
-    <HelloWorld />
+  <div class="container">
+    <GameField />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import GameField from '@/components/GameField.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    GameField,
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  margin-top: 64px;
+}
+</style>
