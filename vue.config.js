@@ -1,7 +1,25 @@
+const path = require('path');
+
 module.exports = {
-    devServer: {
-      overlay: {
-        errors: false
-      }
-    }
-  }
+  devServer: {
+    overlay: {
+      errors: false,
+    },
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+          @import "@/index.scss";
+        `,
+      },
+    },
+  },
+};
