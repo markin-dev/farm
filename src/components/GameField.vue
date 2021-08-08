@@ -11,7 +11,7 @@
         @mousedown-on-scythe="harvest"
       />
       <div>
-        Crops: {{ crops }}&nbsp;
+        Crops: {{ $store.state.count }}&nbsp;
         <FloatText
           v-for="(item) in incomeTextItems"
           :key="item.id"
@@ -48,11 +48,10 @@ export default {
     harvest() {
       this.incomeTextItems.push({
         id: Math.random(),
-        value: `+${this.counter}`,
+        value: '+1',
       });
 
-      this.crops += this.counter;
-      this.counter += 1;
+      this.$store.commit('increment');
     },
 
     temp() {
