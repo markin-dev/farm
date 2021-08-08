@@ -10,8 +10,10 @@
         class="scythe"
         @mousedown-on-scythe="harvest"
       />
-      <div>
-        Crops: {{ $store.state.count }}&nbsp;
+      <div class="crops">
+        <div class="crops__count">
+          Crops: {{ $store.state.count }}
+        </div>
         <FloatText
           v-for="(item) in incomeTextItems"
           :key="item.id"
@@ -86,6 +88,14 @@ export default {
 
     .scythe {
       margin-bottom: 24px;
+    }
+
+    .crops {
+      display: flex;
+
+      &__count {
+        margin-right: 6px;
+      }
     }
   }
 

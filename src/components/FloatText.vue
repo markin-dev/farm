@@ -38,8 +38,6 @@ export default {
 
 <style lang="scss" scoped>
 .float-text {
-  display: inline;
-
   &__value {
     position: absolute;
     display: inline-block;
