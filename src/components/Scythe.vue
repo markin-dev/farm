@@ -2,11 +2,11 @@
   <div
     :style="scytheStyleObject"
     class="scythe"
-    @click="onClick"
   >
     <div
       :style="iconStyleObject"
       class="scythe__icon"
+      @mousedown="onMousedown"
     />
     <transition name="scythe__substrate">
       <div
@@ -55,8 +55,9 @@ export default {
   },
 
   methods: {
-    onClick() {
+    onMousedown() {
       this.isSubstrate = true;
+      this.$emit('mousedown-on-scythe');
 
       this.$nextTick(() => {
         this.isSubstrate = false;
