@@ -11,6 +11,7 @@ import DevPanel from '@/components/DevPanel.vue';
 
 export default {
   name: 'App',
+
   components: {
     GameField,
     DevPanel,

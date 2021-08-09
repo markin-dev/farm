@@ -12,7 +12,7 @@
       />
       <div class="crops">
         <div class="crops__count">
-          Crops: {{ $store.state.count }}
+          Money: {{ $formatMoney($store.state.money) }}
         </div>
         <FloatText
           v-for="item in incomeTextItems"
@@ -50,10 +50,10 @@ export default {
     harvest() {
       this.incomeTextItems.push({
         id: Math.random(),
-        value: '+1',
+        value: `${this.$formatMoney(1)}`,
       });
 
-      this.$store.commit('increment');
+      this.$store.dispatch('harvest');
     },
   },
 };
