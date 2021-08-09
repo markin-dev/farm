@@ -73,6 +73,7 @@ export default {
 <style lang="scss" scoped>
 .scythe {
   position: relative;
+  user-select: none;
 
   &__icon {
     position: absolute;
@@ -84,6 +85,7 @@ export default {
     border-radius: 50%;
     cursor: pointer;
     z-index: 1;
+    user-select: none;
 
     &:hover {
       background-color: $blue-300;
