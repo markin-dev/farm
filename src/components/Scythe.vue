@@ -8,18 +8,23 @@
       class="scythe__icon"
       @mousedown="onMousedown"
     />
-    <transition name="scythe__substrate">
-      <div
-        v-if="isSubstrate"
-        :style="iconStyleObject"
-        class="scythe__substrate"
-      />
-    </transition>
+    <Substrate
+      v-for="item in substrates"
+      :key="item.id"
+      :style-object="iconStyleObject"
+      @expired="substrates.shift()"
+    />
   </div>
 </template>
 
 <script>
+import Substrate from '@/components/Substrate.vue';
+
 export default {
+  components: {
+    Substrate,
+  },
+
   props: {
     size: {
       type: Number,
@@ -29,7 +34,7 @@ export default {
 
   data() {
     return {
-      isSubstrate: false,
+      substrates: [],
     };
   },
 
@@ -56,12 +61,10 @@ export default {
 
   methods: {
     onMousedown() {
-      this.isSubstrate = true;
-      this.$emit('mousedown-on-scythe');
-
-      this.$nextTick(() => {
-        this.isSubstrate = false;
+      this.substrates.push({
+        id: Math.random(),
       });
+      this.$emit('mousedown-on-scythe');
     },
   },
 };
@@ -90,28 +93,11 @@ export default {
       animation: pressed .3s;
     }
   }
-
-  &__substrate {
-    position: absolute;
-    background-color: $blue-200;
-    border-radius: 50%;
-
-    &-leave-to {
-      animation: substrateScaleUp 1s;
-    }
-  }
 }
 
 @keyframes pressed {
   50% {
-    transform: scale(0.9);
-  }
-}
-
-@keyframes substrateScaleUp {
-  to {
-    opacity: 0;
-    transform: scale(1.2);
+    transform: scale(0.98);
   }
 }
 </style>

@@ -15,10 +15,10 @@
           Crops: {{ $store.state.count }}
         </div>
         <FloatText
-          v-for="(item) in incomeTextItems"
+          v-for="item in incomeTextItems"
           :key="item.id"
           :text="item.value"
-          @expired="temp"
+          @expired="incomeTextItems.shift()"
         />
       </div>
     </div>
@@ -54,10 +54,6 @@ export default {
       });
 
       this.$store.commit('increment');
-    },
-
-    temp() {
-      this.incomeTextItems.shift();
     },
   },
 };
