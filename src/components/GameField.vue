@@ -52,7 +52,7 @@ export default {
     harvest() {
       this.incomeTextItems.push({
         id: Math.random(),
-        value: `${this.$formatMoney(0.5)}`,
+        value: `+${this.$formatMoney(this.$store.state.incomePerClick)}`,
       });
 
       this.$store.dispatch('harvest');

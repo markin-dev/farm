@@ -9,6 +9,7 @@ const store = createStore({
     return {
       money: 0,
       totalMoney: 0,
+      incomePerClick: 0.01,
     };
   },
   mutations: {
@@ -21,9 +22,9 @@ const store = createStore({
     },
   },
   actions: {
-    harvest({ commit }) {
-      commit('addMoney', 0.5);
-      commit('addTotalMoney', 0.5);
+    harvest({ commit, state }) {
+      commit('addMoney', state.incomePerClick);
+      commit('addTotalMoney', state.incomePerClick);
     },
   },
 });
