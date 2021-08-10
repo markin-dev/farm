@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="shop-item__count">
-        5
+        {{ amount }}
       </div>
     </div>
   </div>
@@ -42,6 +42,11 @@ export default {
     },
 
     income: {
+      type: Number,
+      default: 0,
+    },
+
+    amount: {
       type: Number,
       default: 0,
     },

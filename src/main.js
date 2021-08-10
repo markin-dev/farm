@@ -10,8 +10,51 @@ const store = createStore({
       money: 0,
       totalMoney: 0,
       incomePerClick: 0.01,
+      crops: [
+        {
+          name: 'Wheat',
+          iconName: 'wheat',
+          basePrice: 100,
+          price: 100,
+          income: 0.01,
+          amount: 0,
+        },
+        {
+          name: 'Potato',
+          iconName: 'potato',
+          basePrice: 200,
+          price: 200,
+          income: 0.02,
+          amount: 0,
+        },
+        {
+          name: 'Carrot',
+          iconName: 'carrot',
+          basePrice: 400,
+          price: 400,
+          income: 0.05,
+          amount: 0,
+        },
+        {
+          name: 'Corn',
+          iconName: 'corn',
+          basePrice: 1000,
+          price: 1000,
+          income: 1.5,
+          amount: 0,
+        },
+        {
+          name: 'Strawberry',
+          iconName: 'strawberry',
+          basePrice: 3000,
+          price: 3000,
+          income: 4,
+          amount: 0,
+        },
+      ],
     };
   },
+
   mutations: {
     addMoney(state, value) {
       state.money += value;
@@ -20,11 +63,22 @@ const store = createStore({
     addTotalMoney(state, value) {
       state.totalMoney += value;
     },
+
+    incrementCropsAmount(state, cropName) {
+      const cropItem = state.crops.find((item) => item.name === cropName);
+
+      cropItem.amount += 1;
+    },
   },
+
   actions: {
     harvest({ commit, state }) {
       commit('addMoney', state.incomePerClick);
       commit('addTotalMoney', state.incomePerClick);
+    },
+
+    buyCrop({ commit }, cropName) {
+      commit('incrementCropsAmount', cropName);
     },
   },
 });
