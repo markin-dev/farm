@@ -4,12 +4,18 @@ $test: #000;
 $lg: 1024px;
 
 @mixin lg {
-    @media (min-width: #{$lg}) {
-        @content;
-    }
- }
+  @media (min-width: #{$lg}) {
+    @content;
+  }
+}
+
+@mixin get-icon($icon) {
+  &-#{$icon} {
+    background-image: url('~@/assets/#{$icon}.png');
+  }
+}
 
 body * {
-    font-family: sans-serif;
-    color: $gray-800;
+  font-family: sans-serif;
+  color: $gray-800;
 }

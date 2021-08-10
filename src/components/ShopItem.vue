@@ -1,16 +1,19 @@
 <template>
   <div class="shop-item">
     <div class="shop-item__wrapper">
-      <div class="shop-item__icon" />
+      <div
+        class="shop-item__icon"
+        :class="[`shop-item__icon-${iconName}`]"
+      />
       <div class="shop-item__desc">
         <div class="shop-item__name">
-          Name
+          {{ name }}
         </div>
         <div class="shop-item__price">
-          Price: 100$
+          Price: {{ $formatMoney(price) }}
         </div>
         <div class="shop-item__per-click">
-          +{{ $formatMoney(0.5) }} per click
+          +{{ $formatMoney(income) }} per click
         </div>
       </div>
       <div class="shop-item__count">
@@ -19,6 +22,32 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    name: {
+      type: String,
+      default: '',
+    },
+
+    iconName: {
+      type: String,
+      default: '',
+    },
+
+    price: {
+      type: Number,
+      default: 0,
+    },
+
+    income: {
+      type: Number,
+      default: 0,
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .shop-item {
@@ -45,10 +74,14 @@
     width: 64px;
     height: 64px;
     margin-right: 16px;
-    background-image: url('~@/assets/wheat.png');
     background-size: contain;
     background-repeat: no-repeat;
-    border-radius: 50%;
+
+    @include get-icon(wheat);
+    @include get-icon(potato);
+    @include get-icon(carrot);
+    @include get-icon(corn);
+    @include get-icon(strawberry);
   }
 
   &__desc {
