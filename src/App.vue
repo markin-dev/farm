@@ -21,6 +21,13 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 64px;
+  max-width: 600px;
+
+  @include lg {
+    max-width: 1200px;
+  }
 }
 </style>

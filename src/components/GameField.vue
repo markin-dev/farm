@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="game-field__right-menu">
-      dummy
+      <CropsShop />
     </div>
   </div>
 </template>
@@ -31,11 +31,13 @@
 <script>
 import Scythe from '@/components/Scythe.vue';
 import FloatText from '@/components/FloatText.vue';
+import CropsShop from '@/components/CropsShop.vue';
 
 export default {
   components: {
     Scythe,
     FloatText,
+    CropsShop,
   },
 
   data() {
@@ -50,7 +52,7 @@ export default {
     harvest() {
       this.incomeTextItems.push({
         id: Math.random(),
-        value: `${this.$formatMoney(1)}`,
+        value: `${this.$formatMoney(0.5)}`,
       });
 
       this.$store.dispatch('harvest');
@@ -72,7 +74,8 @@ export default {
   &__left-menu {
     @include lg {
       width: 25%;
-      border-right: 2px solid $gray-300;
+      border-left: 1px solid $gray-300;
+      border-right: 1px solid $gray-300;
     }
   }
 
@@ -98,7 +101,8 @@ export default {
   &__right-menu {
     @include lg {
       width: 25%;
-      border-left: 2px solid $gray-300;
+      border-left: 1px solid $gray-300;
+      border-right: 1px solid $gray-300;
     }
   }
 }

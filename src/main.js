@@ -22,8 +22,8 @@ const store = createStore({
   },
   actions: {
     harvest({ commit }) {
-      commit('addMoney', 1);
-      commit('addTotalMoney', 1);
+      commit('addMoney', 0.5);
+      commit('addTotalMoney', 0.5);
     },
   },
 });
