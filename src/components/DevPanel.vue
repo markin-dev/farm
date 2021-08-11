@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="!off"
     ref="devPanel"
     class="dev-panel"
     :style="styleObject"
@@ -18,6 +19,13 @@
 
 <script>
 export default {
+  props: {
+    off: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
   data() {
     return {
       offsetTop: 0,

@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <GameField />
-    <!-- <DevPanel>
+    <DevPanel off>
       <pre>{{ $store.state }}</pre>
-    </DevPanel> -->
+    </DevPanel>
   </div>
 </template>
 
