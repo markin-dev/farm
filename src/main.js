@@ -69,6 +69,10 @@ const store = createStore({
 
       cropItem.amount += 1;
     },
+
+    addIncomePerClick(state, value) {
+      state.incomePerClick += value;
+    },
   },
 
   actions: {
@@ -77,8 +81,10 @@ const store = createStore({
       commit('addTotalMoney', state.incomePerClick);
     },
 
-    buyCrop({ commit }, cropName) {
+    buyCrop({ commit, state }, cropName) {
+      const cropItem = state.crops.find((item) => item.name === cropName);
       commit('incrementCropsAmount', cropName);
+      commit('addIncomePerClick', cropItem.income);
     },
   },
 });

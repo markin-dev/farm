@@ -21,6 +21,9 @@
           @expired="incomeTextItems.shift()"
         />
       </div>
+      <div>
+        Income per click: {{ $formatMoney($store.state.incomePerClick) }}
+      </div>
     </div>
     <div class="game-field__right-menu">
       <CropsShop />
@@ -91,6 +94,7 @@ export default {
 
     .crops {
       display: flex;
+      margin-bottom: 8px;
 
       &__count {
         margin-right: 6px;
