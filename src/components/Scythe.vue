@@ -74,7 +74,7 @@ export default {
 .scythe {
   position: relative;
   user-select: none;
-  touch-action: none;
+  touch-action: manipulation;
 
   &__icon {
     position: absolute;
@@ -87,7 +87,7 @@ export default {
     cursor: pointer;
     z-index: 1;
     user-select: none;
-    touch-action: none;
+    touch-action: manipulation;
 
     &:hover {
       background-color: $blue-300;

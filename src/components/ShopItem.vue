@@ -58,7 +58,7 @@ export default {
 .shop-item {
   cursor: pointer;
   user-select: none;
-  touch-action: none;
+  touch-action: manipulation;
 
   &:hover {
     background-color: $gray-50;
