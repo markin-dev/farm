@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <GameField />
-    <DevPanel off>
+    <DevPanel>
       <pre>{{ $store.state }}</pre>
     </DevPanel>
   </div>

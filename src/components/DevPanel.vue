@@ -4,22 +4,32 @@
     class="dev-panel"
     :style="styleObject"
   >
-    <div
-      class="dev-panel__header"
+    <DevPanelHeader
+      :is-minimized="isMinimized"
       @mousedown="startDrag"
+      @toggle-minimized="toggleMinimized"
     />
-    <div class="dev-panel__content">
-      <slot />
-    </div>
     <div
-      class="dev-panel__scale"
-      @mousedown="startScale"
-    />
+      v-if="!isMinimized"
+      class="dev-panel__content"
+    >
+      <slot />
+      <div
+        class="dev-panel__scale"
+        @mousedown="startScale"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import DevPanelHeader from '@/components/DevPanelHeader.vue';
+
 export default {
+  components: {
+    DevPanelHeader,
+  },
+
   props: {
     off: {
       type: Boolean,
@@ -35,7 +45,9 @@ export default {
       shiftY: 0,
       panelWidth: 300,
       panelHeight: 400,
+      panelHeightForMaximize: 0,
       gapFromBounds: 8,
+      isMinimized: false,
     };
   },
 
@@ -125,6 +137,18 @@ export default {
         this.panelHeight = window.innerHeight - this.offsetTop - this.gapFromBounds;
       }
     },
+
+    toggleMinimized() {
+      if (this.isMinimized) {
+        this.panelHeight = this.panelHeightForMaximize;
+      } else {
+        this.panelHeightForMaximize = this.panelHeight;
+        this.panelHeight = 32;
+      }
+
+      this.isMinimized = !this.isMinimized;
+      this.checkoutOfBoundsForDrag();
+    },
   },
 };
 </script>
@@ -137,13 +161,6 @@ export default {
   min-width: 64px;
   min-height: 64px;
   z-index: 9999;
-
-  &__header {
-    flex: 0 0 32px;
-    width: 100%;
-    background-color: $gray-300;
-    cursor: move;
-  }
 
   &__content {
     padding: 16px;
