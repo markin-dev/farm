@@ -70,11 +70,30 @@ export default {
     },
   },
 
+  watch: {
+    panelWidth(width) {
+      if (width < 64) {
+        this.panelWidth = 64;
+      }
+    },
+
+    panelHeight(height) {
+      if (height < 64 && !this.isMinimized) {
+        this.panelHeight = 64;
+      }
+    },
+  },
+
   mounted() {
+    this.setDefaultPanelPosition();
     this.checkoutOfBoundsForDrag();
   },
 
   methods: {
+    setDefaultPanelPosition() {
+      this.offsetTop = window.innerHeight - this.panelHeight;
+    },
+
     startDrag(event) {
       document.onmousemove = this.dragElement;
       document.onmouseup = this.removeDocumentEvents;
@@ -140,8 +159,10 @@ export default {
 
     toggleMinimized() {
       if (this.isMinimized) {
+        this.offsetTop -= this.panelHeightForMaximize - 32;
         this.panelHeight = this.panelHeightForMaximize;
       } else {
+        this.offsetTop += this.panelHeight - 32;
         this.panelHeightForMaximize = this.panelHeight;
         this.panelHeight = 32;
       }
