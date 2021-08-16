@@ -1,16 +1,22 @@
 <template>
   <div class="dev-panel-header">
     <div
-      class="dev-panel-header__default-position-button"
-      @click="$emit('default-position-button-click')"
+      class="dev-panel-header__close-button"
+      @click="$emit('close-button-click')"
     />
-    <div
-      :class="[
-        'dev-panel-header__minimize-button',
-        {'dev-panel-header__minimize-button_minimized' : isMinimized}
-      ]"
-      @click="$emit('toggle-minimized')"
-    />
+    <div class="dev-panel-header__right-actions">
+      <div
+        class="dev-panel-header__default-position-button"
+        @click="$emit('default-position-button-click')"
+      />
+      <div
+        :class="[
+          'dev-panel-header__minimize-button',
+          {'dev-panel-header__minimize-button_minimized' : isMinimized}
+        ]"
+        @click="$emit('minimize-button-click')"
+      />
+    </div>
   </div>
 </template>
 
@@ -28,12 +34,48 @@ export default {
 <style lang="scss" scoped>
 .dev-panel-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   flex: 0 0 32px;
   width: 100%;
   background-color: $gray-300;
   cursor: move;
+
+  &__right-actions {
+    display: flex;
+    margin-right: 8px;
+  }
+
+  &__close-button {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    border: 1px solid;
+    color: $gray-500;
+    cursor: pointer;
+
+    &::after,
+    &::before {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      width: 14px;
+      height: 2px;
+      background: currentColor;
+      transform: rotate(45deg);
+      top: 8px;
+      left: 2px;
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
 
   &__default-position-button {
     box-sizing: border-box;
@@ -76,7 +118,6 @@ export default {
   &__minimize-button {
     width: 20px;
     height: 20px;
-    margin-right: 4px;
     border: 1px solid $gray-500;
     border-bottom-width: 3px;
     cursor: pointer;

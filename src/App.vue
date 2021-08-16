@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <GameField />
-    <DevPanel>
+    <DevPanel
+      v-if="isDevPanel"
+      @close="isDevPanel = false"
+    >
       <pre>{{ $store.state }}</pre>
     </DevPanel>
   </div>
@@ -17,6 +20,24 @@ export default {
   components: {
     GameField,
     DevPanel,
+  },
+
+  data() {
+    return {
+      isDevPanel: true,
+    };
+  },
+
+  mounted() {
+    document.addEventListener('keydown', this.handleKeydown);
+  },
+
+  methods: {
+    handleKeydown(event) {
+      if (event.code === 'KeyD' && event.shiftKey) {
+        this.isDevPanel = !this.isDevPanel;
+      }
+    },
   },
 };
 </script>

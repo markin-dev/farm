@@ -7,7 +7,8 @@
     <DevPanelHeader
       :is-minimized="isMinimized"
       @mousedown.self="startDrag"
-      @toggle-minimized="toggleMinimized"
+      @close-button-click="$emit('close')"
+      @minimize-button-click="toggleMinimized"
       @default-position-button-click="setDefaultPanelPosition"
     />
     <div
@@ -182,7 +183,7 @@ export default {
   position: fixed;
   display: flex;
   flex-direction: column;
-  min-width: 64px;
+  min-width: 92px;
   min-height: 64px;
   z-index: 9999;
 
