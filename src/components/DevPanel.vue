@@ -6,8 +6,9 @@
   >
     <DevPanelHeader
       :is-minimized="isMinimized"
-      @mousedown="startDrag"
+      @mousedown.self="startDrag"
       @toggle-minimized="toggleMinimized"
+      @default-position-button-click="setDefaultPanelPosition"
     />
     <div
       v-if="!isMinimized"
@@ -86,12 +87,14 @@ export default {
 
   mounted() {
     this.setDefaultPanelPosition();
-    this.checkoutOfBoundsForDrag();
   },
 
   methods: {
     setDefaultPanelPosition() {
       this.offsetTop = window.innerHeight - this.panelHeight;
+      this.offsetLeft = 0;
+
+      this.checkoutOfBoundsForDrag();
     },
 
     startDrag(event) {
