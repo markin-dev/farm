@@ -69,11 +69,6 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 8px;
-    transition: transform .1s;
-
-    &:active {
-      transform: scale(0.98);
-    }
   }
 
   &__icon {

@@ -12,7 +12,7 @@
 
 <script>
 import GameField from '@/components/GameField.vue';
-import DevPanel from '@/components/DevPanel.vue';
+import DevPanel from '@/components/DevPanel/DevPanel.vue';
 
 export default {
   name: 'App',

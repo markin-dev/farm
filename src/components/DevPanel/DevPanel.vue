@@ -6,6 +6,7 @@
   >
     <DevPanelHeader
       :is-minimized="isMinimized"
+      :height="$options.headerHeight"
       @mousedown.self="startDrag"
       @close-button-click="$emit('close')"
       @minimize-button-click="toggleMinimized"
@@ -25,9 +26,11 @@
 </template>
 
 <script>
-import DevPanelHeader from '@/components/DevPanelHeader.vue';
+import DevPanelHeader from '@/components/DevPanel/DevPanelHeader.vue';
 
 export default {
+  headerHeight: 32,
+
   components: {
     DevPanelHeader,
   },
@@ -60,6 +63,7 @@ export default {
         left: `${this.offsetLeft}px`,
         width: `${this.panelWidth}px`,
         height: `${this.panelHeight}px`,
+        minHeight: `${this.$options.headerHeight + 32}px`,
       };
     },
 
@@ -69,20 +73,6 @@ export default {
 
     isOutOfBoundsAlongY() {
       return this.offsetTop + this.panelHeight + this.gapFromBounds > window.innerHeight;
-    },
-  },
-
-  watch: {
-    panelWidth(width) {
-      if (width < 64) {
-        this.panelWidth = 64;
-      }
-    },
-
-    panelHeight(height) {
-      if (height < 64 && !this.isMinimized) {
-        this.panelHeight = 64;
-      }
     },
   },
 
@@ -163,12 +153,12 @@ export default {
 
     toggleMinimized() {
       if (this.isMinimized) {
-        this.offsetTop -= this.panelHeightForMaximize - 32;
+        this.offsetTop -= this.panelHeightForMaximize - this.$options.headerHeight;
         this.panelHeight = this.panelHeightForMaximize;
       } else {
-        this.offsetTop += this.panelHeight - 32;
+        this.offsetTop += this.panelHeight - this.$options.headerHeight;
         this.panelHeightForMaximize = this.panelHeight;
-        this.panelHeight = 32;
+        this.panelHeight = this.$options.headerHeight;
       }
 
       this.isMinimized = !this.isMinimized;
@@ -184,7 +174,6 @@ export default {
   display: flex;
   flex-direction: column;
   min-width: 92px;
-  min-height: 64px;
   z-index: 9999;
 
   &__content {
