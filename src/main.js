@@ -7,9 +7,9 @@ import '@/scss/normalize.scss';
 const store = createStore({
   state() {
     return {
-      money: 200,
+      money: 0,
       totalMoney: 0,
-      incomePerClick: 10.01,
+      incomePerClick: 10.00,
       crops: [
         {
           id: 0,
