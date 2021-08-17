@@ -2,14 +2,14 @@
   <div class="crops-list">
     <ShopItem
       v-for="crop in crops"
-      :key="crop.name"
+      :key="crop.id"
       :name="crop.name"
       :icon-name="crop.iconName"
       :price="crop.price"
       :income="crop.income"
       :amount="crop.amount"
       class="crops-list__item"
-      @click="buyCrop(crop.name)"
+      @shop-item-click="buyCrop(crop.id, $event)"
     />
   </div>
 </template>
@@ -29,8 +29,11 @@ export default {
   },
 
   methods: {
-    buyCrop(cropName) {
-      this.$store.dispatch('buyCrop', cropName);
+    buyCrop(cropId, amount) {
+      this.$store.dispatch('buyCrop', {
+        id: cropId,
+        amount,
+      });
     },
   },
 };

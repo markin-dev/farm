@@ -12,6 +12,7 @@ const store = createStore({
       incomePerClick: 0.01,
       crops: [
         {
+          id: 0,
           name: 'Wheat',
           iconName: 'wheat',
           basePrice: 100,
@@ -20,6 +21,7 @@ const store = createStore({
           amount: 0,
         },
         {
+          id: 1,
           name: 'Potato',
           iconName: 'potato',
           basePrice: 200,
@@ -28,6 +30,7 @@ const store = createStore({
           amount: 0,
         },
         {
+          id: 2,
           name: 'Carrot',
           iconName: 'carrot',
           basePrice: 400,
@@ -36,6 +39,7 @@ const store = createStore({
           amount: 0,
         },
         {
+          id: 3,
           name: 'Corn',
           iconName: 'corn',
           basePrice: 1000,
@@ -44,6 +48,7 @@ const store = createStore({
           amount: 0,
         },
         {
+          id: 4,
           name: 'Strawberry',
           iconName: 'strawberry',
           basePrice: 3000,
@@ -64,10 +69,10 @@ const store = createStore({
       state.totalMoney += value;
     },
 
-    incrementCropsAmount(state, cropName) {
-      const cropItem = state.crops.find((item) => item.name === cropName);
+    addCrops(state, payload) {
+      const cropItem = state.crops.find((item) => item.id === payload.id);
 
-      cropItem.amount += 1;
+      cropItem.amount += payload.amount;
     },
 
     addIncomePerClick(state, value) {
@@ -81,10 +86,10 @@ const store = createStore({
       commit('addTotalMoney', state.incomePerClick);
     },
 
-    buyCrop({ commit, state }, cropName) {
-      const cropItem = state.crops.find((item) => item.name === cropName);
-      commit('incrementCropsAmount', cropName);
-      commit('addIncomePerClick', cropItem.income);
+    buyCrop({ commit, state }, payload) {
+      const cropItem = state.crops.find((item) => item.id === payload.id);
+      commit('addCrops', payload);
+      commit('addIncomePerClick', cropItem.income * payload.amount);
     },
   },
 });

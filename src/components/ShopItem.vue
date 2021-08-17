@@ -1,5 +1,8 @@
 <template>
-  <div class="shop-item">
+  <div
+    class="shop-item"
+    @click="onClick"
+  >
     <div class="shop-item__wrapper">
       <div
         class="shop-item__icon"
@@ -16,15 +19,30 @@
           +{{ $formatMoney(income) }} per click
         </div>
       </div>
-      <div class="shop-item__count">
-        {{ amount }}
+      <div class="shop-item__amount">
+        <div class="shop-item__count">
+          {{ amount }}
+        </div>
+        <FloatText
+          v-for="item in floatTextItems"
+          :key="item.id"
+          :text="item.value"
+          :font-size-px="24"
+          @expired="floatTextItems.shift()"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import FloatText from '@/components/FloatText.vue';
+
 export default {
+  components: {
+    FloatText,
+  },
+
   props: {
     name: {
       type: String,
@@ -49,6 +67,24 @@ export default {
     amount: {
       type: Number,
       default: 0,
+    },
+  },
+
+  data() {
+    return {
+      floatTextItems: [],
+      numberOfPurchases: 1,
+    };
+  },
+
+  methods: {
+    onClick() {
+      this.$emit('shop-item-click', this.numberOfPurchases);
+
+      this.floatTextItems.push({
+        id: Math.random(),
+        value: `+${this.numberOfPurchases}`,
+      });
     },
   },
 };
@@ -104,7 +140,12 @@ export default {
     color: $gray-400;
   }
 
+  &__amount {
+    display: flex;
+  }
+
   &__count {
+    margin-right: 4px;
     font-size: 24px;
   }
 }

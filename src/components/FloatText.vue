@@ -6,7 +6,10 @@
     >
       <span
         class="float-text__value"
-        :style="{transition: `all ${duration}s`}"
+        :style="{
+          fontSize: `${fontSizePx}px`,
+          transition: `all ${duration}s`
+        }"
       >
         {{ text }}
       </span>
@@ -25,6 +28,11 @@ export default {
     duration: {
       type: Number,
       default: 0.6,
+    },
+
+    fontSizePx: {
+      type: Number,
+      default: 16,
     },
   },
 
