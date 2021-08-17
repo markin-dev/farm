@@ -1,7 +1,10 @@
 <template>
   <div
-    class="shop-item"
-    @click="onClick"
+    :class="[
+      'shop-item',
+      {'shop-item_disabled': disabled},
+    ]"
+    @click="disabled ? onClick : ''"
   >
     <div class="shop-item__wrapper">
       <div
@@ -68,6 +71,11 @@ export default {
       type: Number,
       default: 0,
     },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -98,6 +106,26 @@ export default {
 
   &:hover {
     background-color: $gray-50;
+  }
+
+  &_disabled {
+    cursor: auto;
+
+    div {
+      color: $gray-400;
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    .shop-item__icon {
+        filter: grayscale(100%);
+    }
+
+    .shop-item__per-click {
+      color: $gray-300;
+    }
   }
 
   &__wrapper {
