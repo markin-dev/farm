@@ -8,6 +8,7 @@
       :price="crop.price"
       :income="crop.income"
       :amount="crop.amount"
+      :disabled="$store.getters.isCropDisabled(crop.id)"
       class="crops-list__item"
       @shop-item-click="buyCrop(crop.id, $event)"
     />

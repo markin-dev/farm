@@ -7,9 +7,9 @@ import '@/scss/normalize.scss';
 const store = createStore({
   state() {
     return {
-      money: 0,
+      money: 200,
       totalMoney: 0,
-      incomePerClick: 0.01,
+      incomePerClick: 10.01,
       crops: [
         {
           id: 0,
@@ -60,9 +60,21 @@ const store = createStore({
     };
   },
 
+  getters: {
+    isCropDisabled: (state) => (id) => {
+      const cropItem = state.crops.find((item) => item.id === id);
+
+      return cropItem.price > state.money;
+    },
+  },
+
   mutations: {
     addMoney(state, value) {
       state.money += value;
+    },
+
+    subtractMoney(state, value) {
+      state.money -= value;
     },
 
     addTotalMoney(state, value) {
@@ -88,6 +100,7 @@ const store = createStore({
 
     buyCrop({ commit, state }, payload) {
       const cropItem = state.crops.find((item) => item.id === payload.id);
+      commit('subtractMoney', cropItem.price);
       commit('addCrops', payload);
       commit('addIncomePerClick', cropItem.income * payload.amount);
     },

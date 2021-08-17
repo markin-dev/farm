@@ -4,7 +4,7 @@
       'shop-item',
       {'shop-item_disabled': disabled},
     ]"
-    @click="disabled ? onClick : ''"
+    @click="onClick"
   >
     <div class="shop-item__wrapper">
       <div
@@ -87,6 +87,10 @@ export default {
 
   methods: {
     onClick() {
+      if (this.disabled) {
+        return;
+      }
+
       this.$emit('shop-item-click', this.numberOfPurchases);
 
       this.floatTextItems.push({
