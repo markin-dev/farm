@@ -10,6 +10,7 @@ const store = createStore({
       money: 0,
       totalMoney: 0,
       incomePerClick: 10,
+      autoIncome: 1,
       crops: [
         {
           id: 0,
@@ -110,6 +111,10 @@ const store = createStore({
       commit('addCrops', payload);
       commit('addIncomePerClick', cropItem.income * payload.amount);
       commit('increaseCropPrice', payload.id);
+    },
+
+    addAutoIncome({ commit, state }) {
+      commit('addMoney', state.autoIncome);
     },
   },
 });

@@ -21,8 +21,19 @@
           @expired="incomeTextItems.shift()"
         />
       </div>
-      <div>
+      <div class="income-per-click">
         Income per click: {{ $formatMoney($store.state.incomePerClick) }}
+      </div>
+      <div class="auto-income">
+        <div class="auto-income__value">
+          Auto income: {{ $formatMoney($store.state.incomePerClick) }}
+        </div>
+        <FloatText
+          v-for="item in autoIncomeTextItems"
+          :key="item.id"
+          :text="item.value"
+          @expired="autoIncomeTextItems.shift()"
+        />
       </div>
     </div>
     <div class="game-field__right-menu">
@@ -48,7 +59,14 @@ export default {
       crops: 0,
       incomeTextItems: [],
       counter: 0,
+      autoIncomeTextItems: [],
     };
+  },
+
+  mounted() {
+    setInterval(() => {
+      this.addAutoIncome();
+    }, 1000);
   },
 
   methods: {
@@ -59,6 +77,15 @@ export default {
       });
 
       this.$store.dispatch('harvest');
+    },
+
+    addAutoIncome() {
+      this.autoIncomeTextItems.push({
+        id: Math.random(),
+        value: `+${this.$formatMoney(this.$store.state.autoIncome)}`,
+      });
+
+      this.$store.dispatch('addAutoIncome');
     },
   },
 };
@@ -99,6 +126,18 @@ export default {
       &__count {
         margin-right: 6px;
       }
+    }
+
+    .income-per-click {
+      margin-bottom: 8px;
+
+      &__value {
+        margin-right: 6px;
+      }
+    }
+
+    .auto-income {
+      display: flex;
     }
   }
 
