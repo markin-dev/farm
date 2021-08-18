@@ -9,51 +9,51 @@ const store = createStore({
     return {
       money: 0,
       totalMoney: 0,
-      incomePerClick: 10.00,
+      incomePerClick: 10,
       crops: [
         {
           id: 0,
           name: 'Wheat',
           iconName: 'wheat',
-          basePrice: 100,
-          price: 100,
-          income: 0.01,
+          basePrice: 1000,
+          price: 1000,
+          income: 10,
           amount: 0,
         },
         {
           id: 1,
           name: 'Potato',
           iconName: 'potato',
-          basePrice: 200,
-          price: 200,
-          income: 0.02,
+          basePrice: 10000,
+          price: 10000,
+          income: 50,
           amount: 0,
         },
         {
           id: 2,
           name: 'Carrot',
           iconName: 'carrot',
-          basePrice: 400,
-          price: 400,
-          income: 0.05,
+          basePrice: 50000,
+          price: 50000,
+          income: 125,
           amount: 0,
         },
         {
           id: 3,
           name: 'Corn',
           iconName: 'corn',
-          basePrice: 1000,
-          price: 1000,
-          income: 1.5,
+          basePrice: 250000,
+          price: 250000,
+          income: 312,
           amount: 0,
         },
         {
           id: 4,
           name: 'Strawberry',
           iconName: 'strawberry',
-          basePrice: 3000,
-          price: 3000,
-          income: 4,
+          basePrice: 1250000,
+          price: 1250000,
+          income: 781,
           amount: 0,
         },
       ],
@@ -90,6 +90,12 @@ const store = createStore({
     addIncomePerClick(state, value) {
       state.incomePerClick += value;
     },
+
+    increaseCropPrice(state, id) {
+      const cropItem = state.crops.find((item) => item.id === id);
+
+      cropItem.price = Math.round(cropItem.price * 1.1);
+    },
   },
 
   actions: {
@@ -103,6 +109,7 @@ const store = createStore({
       commit('subtractMoney', cropItem.price);
       commit('addCrops', payload);
       commit('addIncomePerClick', cropItem.income * payload.amount);
+      commit('increaseCropPrice', payload.id);
     },
   },
 });
