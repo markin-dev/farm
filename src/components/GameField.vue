@@ -1,7 +1,7 @@
 <template>
   <div class="game-field">
     <div class="game-field__left-menu">
-      dummy
+      <AnimalsShop />
     </div>
     <div
       class="game-field__main-field"
@@ -26,7 +26,7 @@
       </div>
       <div class="auto-income">
         <div class="auto-income__value">
-          Auto income: {{ $formatMoney($store.state.incomePerClick) }}
+          Auto income: {{ $formatMoney($store.state.autoIncome) }}
         </div>
         <FloatText
           v-for="item in autoIncomeTextItems"
@@ -45,12 +45,14 @@
 <script>
 import Scythe from '@/components/Scythe.vue';
 import FloatText from '@/components/FloatText.vue';
+import AnimalsShop from '@/components/AnimalsShop.vue';
 import CropsShop from '@/components/CropsShop.vue';
 
 export default {
   components: {
     Scythe,
     FloatText,
+    AnimalsShop,
     CropsShop,
   },
 
@@ -64,9 +66,13 @@ export default {
   },
 
   mounted() {
-    setInterval(() => {
-      this.addAutoIncome();
-    }, 1000);
+    this.unwatchAutoIncome = this.$watch('$store.state.autoIncome', () => {
+      setInterval(() => {
+        this.addAutoIncome();
+      }, 500);
+
+      this.unwatchAutoIncome();
+    });
   },
 
   methods: {
@@ -85,7 +91,7 @@ export default {
         value: `+${this.$formatMoney(this.$store.state.autoIncome)}`,
       });
 
-      this.$store.dispatch('addAutoIncome');
+      this.$store.dispatch('addAutoIncomeMoney');
     },
   },
 };
@@ -121,7 +127,7 @@ export default {
 
     .crops {
       display: flex;
-      margin-bottom: 8px;
+      margin-bottom: 24px;
 
       &__count {
         margin-right: 6px;
@@ -129,7 +135,7 @@ export default {
     }
 
     .income-per-click {
-      margin-bottom: 8px;
+      margin-bottom: 24px;
 
       &__value {
         margin-right: 6px;

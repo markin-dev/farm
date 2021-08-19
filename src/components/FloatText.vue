@@ -8,7 +8,7 @@
         class="float-text__value"
         :style="{
           fontSize: `${fontSizePx}px`,
-          transition: `all ${duration}s`
+          transition: `all ${duration}s`,
         }"
       >
         {{ text }}

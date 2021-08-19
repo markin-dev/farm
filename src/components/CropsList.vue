@@ -6,7 +6,7 @@
       :name="crop.name"
       :icon-name="crop.iconName"
       :price="crop.price"
-      :income="crop.income"
+      :income-text="`+${$formatMoney(crop.income)} per click`"
       :amount="crop.amount"
       :disabled="$store.getters.isCropDisabled(crop.id)"
       class="crops-list__item"

@@ -19,7 +19,7 @@
           Price: {{ $formatMoney(price) }}
         </div>
         <div class="shop-item__per-click">
-          +{{ $formatMoney(income) }} per click
+          {{ incomeText }}
         </div>
       </div>
       <div class="shop-item__amount">
@@ -62,9 +62,9 @@ export default {
       default: 0,
     },
 
-    income: {
-      type: Number,
-      default: 0,
+    incomeText: {
+      type: String,
+      default: '',
     },
 
     amount: {
@@ -151,6 +151,11 @@ export default {
     @include get-icon(carrot);
     @include get-icon(corn);
     @include get-icon(strawberry);
+    @include get-icon(chicken);
+    @include get-icon(rabbit);
+    @include get-icon(pig);
+    @include get-icon(goat);
+    @include get-icon(cow);
   }
 
   &__desc {
