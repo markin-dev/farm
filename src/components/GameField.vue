@@ -60,7 +60,6 @@ export default {
     return {
       crops: 0,
       incomeTextItems: [],
-      counter: 0,
       autoIncomeTextItems: [],
     };
   },
