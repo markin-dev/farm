@@ -65,11 +65,14 @@ export default {
   },
 
   mounted() {
-    this.unwatchAutoIncome = this.$watch('$store.state.autoIncome', () => {
-      setInterval(() => {
-        this.addAutoIncome();
-      }, 500);
+    if (this.$store.state.autoIncome) {
+      this.setAutoIncomeInterval();
 
+      return;
+    }
+
+    this.unwatchAutoIncome = this.$watch('$store.state.autoIncome', () => {
+      this.setAutoIncomeInterval();
       this.unwatchAutoIncome();
     });
   },
@@ -91,6 +94,12 @@ export default {
       });
 
       this.$store.dispatch('addAutoIncomeMoney');
+    },
+
+    setAutoIncomeInterval() {
+      setInterval(() => {
+        this.addAutoIncome();
+      }, 500);
     },
   },
 };

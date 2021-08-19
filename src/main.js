@@ -4,6 +4,21 @@ import formatMoney from '@/utils/formatMoney';
 import App from './App.vue';
 import '@/scss/normalize.scss';
 
+const autosavePlugin = (store) => {
+  const loadedData = localStorage.getItem('farm');
+  const parsedData = JSON.parse(loadedData);
+
+  if (loadedData) {
+    store.commit('initialLoadData', parsedData);
+  }
+
+  store.subscribe((mutation, state) => {
+    const stringifiedState = JSON.stringify(state);
+
+    localStorage.setItem('farm', stringifiedState);
+  });
+};
+
 const store = createStore({
   state() {
     return {
@@ -113,6 +128,10 @@ const store = createStore({
   },
 
   mutations: {
+    initialLoadData(state, payload) {
+      this.replaceState(Object.assign(state, payload));
+    },
+
     addMoney(state, value) {
       state.money += value;
     },
@@ -184,6 +203,8 @@ const store = createStore({
       commit('addMoney', state.autoIncome);
     },
   },
+
+  plugins: [autosavePlugin],
 });
 
 const app = createApp(App);
