@@ -40,8 +40,6 @@ const autosavePlugin = (store) => {
   load(store);
 
   setInterval(() => {
-    console.log(SECRET_KEY);
-
     save(store);
   }, AUTOSAVE_DELAY_MS);
 };
