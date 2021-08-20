@@ -7,12 +7,14 @@
     >
       <pre>{{ $store.state }}</pre>
     </DevPanel>
+    <SavingStatusIcon />
   </div>
 </template>
 
 <script>
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/DevPanel/DevPanel.vue';
+import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
 
 export default {
   name: 'App',
@@ -20,6 +22,7 @@ export default {
   components: {
     GameField,
     DevPanel,
+    SavingStatusIcon,
   },
 
   data() {
