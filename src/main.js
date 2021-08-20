@@ -1,30 +1,9 @@
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
 import formatMoney from '@/utils/formatMoney';
+import autosavePlugin from '@/autoSavePlugin';
 import App from './App.vue';
 import '@/scss/normalize.scss';
-
-const autosavePlugin = (store) => {
-  const AUTOSAVE_DELAY_MS = 10000;
-  const loadedData = localStorage.getItem('farm');
-  const parsedData = JSON.parse(loadedData);
-
-  if (loadedData) {
-    store.commit('initialLoadData', parsedData);
-  }
-
-  setInterval(() => {
-    const stringifiedState = JSON.stringify(store.state);
-
-    store.commit('setSaveStatus', true);
-
-    setTimeout(() => {
-      store.commit('setSaveStatus', false);
-    }, 1000);
-
-    localStorage.setItem('farm', stringifiedState);
-  }, AUTOSAVE_DELAY_MS);
-};
 
 const store = createStore({
   state() {
