@@ -3,6 +3,7 @@
     <transition
       appear
       name="float-text"
+      @after-enter="$emit('expired');"
     >
       <span
         class="float-text__value"
@@ -34,12 +35,6 @@ export default {
       type: Number,
       default: 16,
     },
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.$emit('expired');
-    }, this.duration * 1000);
   },
 };
 </script>
