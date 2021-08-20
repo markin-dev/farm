@@ -22,7 +22,7 @@
   opacity: 0;
   transition: all 1s;
 
-  @include get-icon(save);
+  @include get-icon('save');
 
   &-enter-active {
     opacity: 1;
