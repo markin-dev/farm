@@ -64,16 +64,14 @@ export default {
     };
   },
 
-  mounted() {
-    if (this.$store.state.autoIncome) {
-      this.setAutoIncomeInterval();
-
-      return;
-    }
-
-    this.unwatchAutoIncome = this.$watch('$store.state.autoIncome', () => {
-      this.setAutoIncomeInterval();
-      this.unwatchAutoIncome();
+  created() {
+    this.$store.subscribeAction((action) => {
+      if (action.type === 'addAutoIncomeMoney') {
+        this.autoIncomeTextItems.push({
+          id: Math.random(),
+          value: `+${this.$formatMoney(this.$store.state.autoIncome)}`,
+        });
+      }
     });
   },
 
@@ -85,21 +83,6 @@ export default {
       });
 
       this.$store.dispatch('harvest');
-    },
-
-    addAutoIncome() {
-      this.autoIncomeTextItems.push({
-        id: Math.random(),
-        value: `+${this.$formatMoney(this.$store.state.autoIncome)}`,
-      });
-
-      this.$store.dispatch('addAutoIncomeMoney');
-    },
-
-    setAutoIncomeInterval() {
-      setInterval(() => {
-        this.addAutoIncome();
-      }, 500);
     },
   },
 };
@@ -152,6 +135,10 @@ export default {
 
     .auto-income {
       display: flex;
+
+      &__value {
+        margin-right: 6px;
+      }
     }
   }
 

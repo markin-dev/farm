@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { createStore } from 'vuex';
 import formatMoney from '@/utils/formatMoney';
 import autosavePlugin from '@/autoSavePlugin';
+import gameLoopPlugin from '@/gameLoopPlugin';
 import App from './App.vue';
 import '@/scss/normalize.scss';
 
@@ -195,7 +196,10 @@ const store = createStore({
     },
   },
 
-  plugins: [autosavePlugin],
+  plugins: [
+    autosavePlugin,
+    gameLoopPlugin,
+  ],
 });
 
 const app = createApp(App);
