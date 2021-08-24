@@ -1,3 +1,5 @@
+import { save } from '@/saveLoad';
+
 const TICK = 500;
 let mainGameInterval;
 
@@ -42,6 +44,7 @@ const gameLoopPlugin = (store) => {
     if (document.hidden) {
       startIdleGameLoop(store);
     } else {
+      save(store);
       startActiveGameLoop(store);
     }
   });
