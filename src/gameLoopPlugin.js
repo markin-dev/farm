@@ -1,29 +1,50 @@
-const TICK = 100;
+const TICK = 500;
+let mainGameInterval;
 
-const everyNumberOfTicks = (cb, everyTick) => {
-  const ms = Date.now();
-  const remainderIfDivision = ms % (TICK * everyTick);
-  const floor = Math.floor(remainderIfDivision / TICK);
-
-  if (!floor) {
-    cb();
-  }
-};
-
-const addAutoIncome = (store) => {
+const addAutoIncome = (store, multiplier = 1) => {
   if (!store.state.autoIncome) {
     return;
   }
 
-  everyNumberOfTicks(() => {
-    store.dispatch('addAutoIncomeMoney');
-  }, 5);
+  store.dispatch('addAutoIncomeMoney', multiplier);
+};
+
+const makeNumberOfGameTicks = (number, store) => {
+  addAutoIncome(store, number);
+};
+
+const startActiveGameLoop = (store) => {
+  clearInterval(mainGameInterval);
+
+  mainGameInterval = setInterval(() => {
+    makeNumberOfGameTicks(1, store);
+  }, TICK);
+};
+
+const startIdleGameLoop = (store) => {
+  let lastTickMs = Date.now();
+
+  clearInterval(mainGameInterval);
+
+  mainGameInterval = setInterval(() => {
+    const nowMs = Date.now();
+    const numberOfGameTicks = (nowMs - lastTickMs) / TICK;
+
+    makeNumberOfGameTicks(Math.floor(numberOfGameTicks), store);
+    lastTickMs = nowMs;
+  }, 5000);
 };
 
 const gameLoopPlugin = (store) => {
-  setInterval(() => {
-    addAutoIncome(store);
-  }, TICK);
+  startActiveGameLoop(store);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      startIdleGameLoop(store);
+    } else {
+      startActiveGameLoop(store);
+    }
+  });
 };
 
 export default gameLoopPlugin;

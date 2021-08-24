@@ -69,7 +69,7 @@ export default {
       if (action.type === 'addAutoIncomeMoney') {
         this.autoIncomeTextItems.push({
           id: Math.random(),
-          value: `+${this.$formatMoney(this.$store.state.autoIncome)}`,
+          value: `+${this.$formatMoney(this.$store.state.autoIncome * action.payload)}`,
         });
       }
     });

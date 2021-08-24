@@ -191,8 +191,8 @@ const store = createStore({
       commit('increaseAnimalPrice', payload.id);
     },
 
-    addAutoIncomeMoney({ commit, state }) {
-      commit('addMoney', state.autoIncome);
+    addAutoIncomeMoney({ commit, state }, payload) {
+      commit('addMoney', state.autoIncome * payload);
     },
   },
 
