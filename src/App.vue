@@ -1,17 +1,21 @@
 <template>
-  <div class="container">
-    <GameField />
-    <DevPanel
-      v-if="isDevPanel"
-      @close="isDevPanel = false"
-    >
-      <pre>{{ $store.state }}</pre>
-    </DevPanel>
-    <SavingStatusIcon />
+  <div>
+    <Header />
+    <div class="container">
+      <GameField />
+      <DevPanel
+        v-if="isDevPanel"
+        @close="isDevPanel = false"
+      >
+        <pre>{{ $store.state }}</pre>
+      </DevPanel>
+      <SavingStatusIcon />
+    </div>
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/DevPanel/DevPanel.vue';
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
@@ -23,6 +27,7 @@ export default {
     GameField,
     DevPanel,
     SavingStatusIcon,
+    Header,
   },
 
   data() {
@@ -49,7 +54,6 @@ export default {
 .container {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 64px;
   max-width: 600px;
 
   @include lg {
