@@ -100,7 +100,7 @@ export default {
 
   &__left-menu {
     @include lg {
-      width: 25%;
+      width: 30%;
       border-left: 1px solid $gray-300;
       border-right: 1px solid $gray-300;
     }
@@ -144,7 +144,7 @@ export default {
 
   &__right-menu {
     @include lg {
-      width: 25%;
+      width: 30%;
       border-left: 1px solid $gray-300;
       border-right: 1px solid $gray-300;
     }
