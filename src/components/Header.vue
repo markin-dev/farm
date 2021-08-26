@@ -37,7 +37,7 @@ export default {
   padding: 8px 24px;
   height: 64px;
   border-bottom: 1px solid $gray-300;
-  background-color: $gray-100;
+  background-color: $gray-50;
   box-sizing: border-box;
 
   .actions {
