@@ -3,4 +3,7 @@ module.exports = {
     'plugin:vue/recommended',
     '@vue/airbnb',
   ],
+  rules:{
+    "linebreak-style": 0
+  }
 };
