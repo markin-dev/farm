@@ -1,8 +1,9 @@
 import AES from 'crypto-js/aes';
 import Utf8 from 'crypto-js/enc-utf8';
+import getSecretKey from '@/utils/getSecretKey';
 
-const STORAGE_KEY = 'farm';
-const SECRET_KEY = process.env.VUE_APP_SECRET_KEY;
+const STORAGE_KEY = 'farmSave';
+const SECRET_KEY = getSecretKey();
 
 export const save = (store) => {
   const stringifiedState = JSON.stringify(store.state);
@@ -29,8 +30,7 @@ export const load = (store) => {
 
     store.commit('initialLoadData', parsedData);
   } catch (e) {
-    // eslint-disable-next-line
-    console.warn('Save broken, lets start from beginnig!');
+    console.warn('Save broken, lets start from beginnig!'); // eslint-disable-line
     localStorage.removeItem(STORAGE_KEY);
   }
 };
