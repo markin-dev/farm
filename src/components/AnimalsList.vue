@@ -16,9 +16,8 @@
 </template>
 
 <script>
-import ShopItem from '@/components/ShopItem.vue';
-
 import { mapState } from 'vuex';
+import ShopItem from '@/components/ShopItem.vue';
 
 export default {
   components: {
