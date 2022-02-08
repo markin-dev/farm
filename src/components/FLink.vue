@@ -20,7 +20,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    color: $gray-600;
+    color: $gray-500;
   }
 }
 </style>
