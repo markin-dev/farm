@@ -19,7 +19,13 @@ body * {
   font-family: sans-serif;
   color: $gray-800;
 
-  pre {
+  pre, p {
     margin: 0;
+  }
+
+  a {
+    &:hover {
+      color: $gray-500;
+    }
   }
 }
