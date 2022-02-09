@@ -33,6 +33,7 @@ const startIdleGameLoop = (store) => {
     const numberOfGameTicks = (nowMs - lastTickMs) / TICK;
 
     makeNumberOfGameTicks(Math.floor(numberOfGameTicks), store);
+    save(store);
     lastTickMs = nowMs;
   }, 5000);
 };
