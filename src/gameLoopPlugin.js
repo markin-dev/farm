@@ -1,6 +1,7 @@
 import { save } from '@/saveLoad';
 
-const TICK = 500;
+const DEFAULT_GAME_TICK_MS = 500;
+const IDLE_GAME_LOOP_INTERVAL_MS = 5000;
 let mainGameInterval;
 
 const addAutoIncome = (store, multiplier = 1) => {
@@ -20,7 +21,7 @@ const startActiveGameLoop = (store) => {
 
   mainGameInterval = setInterval(() => {
     makeNumberOfGameTicks(1, store);
-  }, TICK);
+  }, DEFAULT_GAME_TICK_MS);
 };
 
 const startIdleGameLoop = (store) => {
@@ -30,12 +31,12 @@ const startIdleGameLoop = (store) => {
 
   mainGameInterval = setInterval(() => {
     const nowMs = Date.now();
-    const numberOfGameTicks = (nowMs - lastTickMs) / TICK;
+    const numberOfGameTicks = (nowMs - lastTickMs) / DEFAULT_GAME_TICK_MS;
 
     makeNumberOfGameTicks(Math.floor(numberOfGameTicks), store);
     save(store);
     lastTickMs = nowMs;
-  }, 5000);
+  }, IDLE_GAME_LOOP_INTERVAL_MS);
 };
 
 const gameLoopPlugin = (store) => {
