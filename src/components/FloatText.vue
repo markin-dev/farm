@@ -41,6 +41,8 @@ export default {
 
 <style lang="scss" scoped>
 .float-text {
+  pointer-events: none;
+
   &__value {
     position: absolute;
     display: inline-block;
