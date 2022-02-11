@@ -1,21 +1,23 @@
 <template>
-  <div class="float-text">
-    <transition
-      appear
-      name="float-text"
-      @after-enter="$emit('expired');"
+  <transition
+    appear
+    name="float-text"
+    @after-enter="$emit('expired');"
+  >
+    <div
+      class="float-text"
+      :style="{transition: `all ${duration}s`}"
     >
       <span
         class="float-text__value"
         :style="{
           fontSize: `${fontSizePx}px`,
-          transition: `all ${duration}s`,
         }"
       >
         {{ text }}
       </span>
-    </transition>
-  </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -47,11 +49,6 @@ export default {
     position: absolute;
     display: inline-block;
     color: $green-500;
-    opacity: 0;
-  }
-
-  &-enter-active {
-    opacity: 1;
   }
 
   &-enter-to {
