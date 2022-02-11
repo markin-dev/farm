@@ -30,8 +30,9 @@ export default {
 <style lang="scss" scoped>
 .substrate {
   position: absolute;
-  background-color: $blue-200;
+  background-color: $blue-100;
   border-radius: 50%;
+  z-index: -1;
 
   &-enter-to {
     animation: substrateScaleUp 1s;

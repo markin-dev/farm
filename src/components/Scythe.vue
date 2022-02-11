@@ -60,11 +60,11 @@ export default {
   },
 
   methods: {
-    onMousedown() {
+    onMousedown(event) {
       this.substrates.push({
         id: Math.random(),
       });
-      this.$emit('mousedown-on-scythe');
+      this.$emit('mousedown-on-scythe', event);
     },
   },
 };
@@ -85,12 +85,12 @@ export default {
     background-color: $blue-200;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 1;
     user-select: none;
     touch-action: manipulation;
+    transition: opacity .2s;
 
     &:hover {
-      background-color: $blue-300;
+      opacity: .3;
     }
 
     &:active {
