@@ -6,20 +6,14 @@
     <div
       class="game-field__main-field"
     >
-      <Scythe
-        class="scythe"
-        @mousedown-on-scythe="harvest"
-      />
-      <div class="crops">
-        <div class="crops__count">
-          Money: {{ $formatMoney($store.state.money) }}
-        </div>
-        <FloatText
-          v-for="item in incomeTextItems"
-          :key="item.id"
-          :text="item.value"
-          @expired="incomeTextItems.shift()"
+      <ScytheWrapper v-slot="{handleHarvest}">
+        <Scythe
+          class="scythe"
+          @mousedown-on-scythe="handleHarvest"
         />
+      </ScytheWrapper>
+      <div class="money">
+        Money: {{ $formatMoney($store.state.money) }}
       </div>
       <div class="income-per-click">
         Income per click: {{ $formatMoney($store.state.incomePerClick) }}
@@ -43,6 +37,7 @@
 </template>
 
 <script>
+import ScytheWrapper from '@/components/ScytheWrapper.vue';
 import Scythe from '@/components/Scythe.vue';
 import FloatText from '@/components/FloatText.vue';
 import AnimalsShop from '@/components/AnimalsShop.vue';
@@ -50,6 +45,7 @@ import CropsShop from '@/components/CropsShop.vue';
 
 export default {
   components: {
+    ScytheWrapper,
     Scythe,
     FloatText,
     AnimalsShop,
@@ -73,17 +69,6 @@ export default {
         });
       }
     });
-  },
-
-  methods: {
-    harvest() {
-      this.incomeTextItems.push({
-        id: Math.random(),
-        value: `+${this.$formatMoney(this.$store.state.incomePerClick)}`,
-      });
-
-      this.$store.dispatch('harvest');
-    },
   },
 };
 </script>
@@ -116,7 +101,7 @@ export default {
       margin-bottom: 24px;
     }
 
-    .crops {
+    .money {
       display: flex;
       margin-bottom: 24px;
 
