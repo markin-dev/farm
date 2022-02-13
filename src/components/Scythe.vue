@@ -5,9 +5,11 @@
   >
     <div
       :style="iconStyleObject"
-      class="scythe__icon"
+      class="scythe__button"
       @mousedown="onMousedown"
-    />
+    >
+      <ScytheIcon class="scythe__button-icon" />
+    </div>
     <Substrate
       v-for="item in substrates"
       :key="item.id"
@@ -18,10 +20,12 @@
 </template>
 
 <script>
+import ScytheIcon from '@/components/svgWrappers/ScytheIcon.vue';
 import Substrate from '@/components/Substrate.vue';
 
 export default {
   components: {
+    ScytheIcon,
     Substrate,
   },
 
@@ -76,26 +80,35 @@ export default {
   user-select: none;
   touch-action: manipulation;
 
-  &__icon {
+  &__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    background-image: url('~@/assets/scythe.png');
-    background-size: 80%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-color: $blue-200;
+    background-color: $blue-300;
     border-radius: 50%;
     cursor: pointer;
     user-select: none;
     touch-action: manipulation;
-    transition: opacity .2s;
+    transition: background-color .2s;
 
     &:hover {
-      opacity: .3;
+      background-color: $blue-200;
+
+      .scythe__button-icon {
+        fill: white;
+      }
     }
 
     &:active {
       animation: pressed .3s;
     }
+  }
+
+  &__button-icon {
+    fill: $gray-800;
+    transition: fill .2s;
   }
 }
 
