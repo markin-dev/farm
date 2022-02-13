@@ -2,7 +2,6 @@
   <transition
     appear
     name="float-text"
-    @after-enter="$emit('expired');"
   >
     <div
       class="float-text"
@@ -37,6 +36,12 @@ export default {
       type: Number,
       default: 16,
     },
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.$emit('expired');
+    }, this.duration * 1000);
   },
 };
 </script>
