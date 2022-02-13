@@ -11,6 +11,7 @@
       class="scythe-wrapper__float-text"
       :text="item.value"
       :style="getFloatTextStyle(item)"
+      :font-size-px="fontSize"
       @expired="incomeTextItems.shift()"
     />
   </div>
@@ -27,6 +28,7 @@ export default {
   data() {
     return {
       incomeTextItems: [],
+      fontSize: 16,
     };
   },
 
@@ -45,8 +47,8 @@ export default {
     },
 
     getFloatTextStyle(item) {
-      const customYOffset = 15;
-      const symbolWidthPx = 4;
+      const customYOffset = this.fontSize;
+      const symbolWidthPx = this.fontSize * 0.28;
       const itemValueLength = item.value.length;
       const customXOffset = symbolWidthPx * itemValueLength;
 
