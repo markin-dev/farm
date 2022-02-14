@@ -1,19 +1,19 @@
 <template>
   <div
-    ref="scytheWrapper"
-    class="scythe-wrapper"
+    ref="floatTextZone"
+    class="float-text-zone"
   >
-    <slot :handleHarvest="handleHarvest" />
     <FloatText
-      v-for="item in incomeTextItems"
+      v-for="item in floatTextItems"
       :key="item.id"
       :ref="`floatText${item.id}`"
-      class="scythe-wrapper__float-text"
+      class="float-text-zone__float-text"
       :text="item.value"
       :style="getFloatTextStyle(item)"
       :font-size-px="fontSize"
-      @expired="incomeTextItems.shift()"
+      @expired="floatTextItems.shift()"
     />
+    <slot />
   </div>
 </template>
 
@@ -25,25 +25,31 @@ export default {
     FloatText,
   },
 
+  provide() {
+    return {
+      floatTextProvider: {
+        renderFloatTextItem: this.renderFloatTextItem,
+      },
+    };
+  },
+
   data() {
     return {
-      incomeTextItems: [],
+      floatTextItems: [],
       fontSize: 16,
     };
   },
 
   methods: {
-    handleHarvest(e) {
-      const wrapperRect = this.$refs.scytheWrapper.getBoundingClientRect();
+    async renderFloatTextItem(e) {
+      const zoneRect = this.$refs.floatTextZone.getBoundingClientRect();
 
-      this.incomeTextItems.push({
+      this.floatTextItems.push({
         id: Math.random(),
         value: `+${this.$formatMoney(this.$store.state.incomePerClick)}`,
-        x: e.clientX - wrapperRect.left,
-        y: e.clientY - wrapperRect.top,
+        x: e.x - zoneRect.left,
+        y: e.y - zoneRect.top,
       });
-
-      this.$store.dispatch('harvest');
     },
 
     getFloatTextStyle(item) {
@@ -62,11 +68,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scythe-wrapper {
+.float-text-zone {
   position: relative;
+  outline: 1px solid blue;
 
   &__float-text {
     position: absolute;
+    z-index: 10;
   }
 }
 </style>

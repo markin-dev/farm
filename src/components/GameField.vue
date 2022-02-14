@@ -6,12 +6,10 @@
     <div
       class="game-field__main-field"
     >
-      <ScytheWrapper v-slot="{handleHarvest}">
-        <Scythe
-          class="scythe"
-          @mousedown-on-scythe="handleHarvest"
-        />
-      </ScytheWrapper>
+      <Scythe
+        class="scythe"
+        @mousedown-on-scythe="handleHarvest"
+      />
       <div class="money">
         Money: {{ $formatMoney($store.state.money) }}
       </div>
@@ -37,7 +35,6 @@
 </template>
 
 <script>
-import ScytheWrapper from '@/components/ScytheWrapper.vue';
 import Scythe from '@/components/Scythe.vue';
 import FloatText from '@/components/FloatText.vue';
 import AnimalsShop from '@/components/AnimalsShop.vue';
@@ -45,7 +42,6 @@ import CropsShop from '@/components/CropsShop.vue';
 
 export default {
   components: {
-    ScytheWrapper,
     Scythe,
     FloatText,
     AnimalsShop,

@@ -29,6 +29,8 @@ export default {
     Substrate,
   },
 
+  inject: ['floatTextProvider'],
+
   props: {
     size: {
       type: Number,
@@ -65,6 +67,11 @@ export default {
 
   methods: {
     onMousedown(event) {
+      this.floatTextProvider.renderFloatTextItem({
+        x: event.clientX,
+        y: event.clientY,
+      });
+
       this.substrates.push({
         id: Math.random(),
       });

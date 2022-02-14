@@ -2,7 +2,9 @@
   <div>
     <Header />
     <div class="container">
-      <GameField />
+      <FloatTextZone>
+        <GameField />
+      </FloatTextZone>
       <DevPanel
         v-if="isDevPanel"
         @close="isDevPanel = false"
@@ -16,6 +18,7 @@
 
 <script>
 import Header from '@/components/Header.vue';
+import FloatTextZone from '@/components/FloatTextZone.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/DevPanel/DevPanel.vue';
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
@@ -24,10 +27,11 @@ export default {
   name: 'App',
 
   components: {
+    Header,
+    FloatTextZone,
     GameField,
     DevPanel,
     SavingStatusIcon,
-    Header,
   },
 
   data() {
