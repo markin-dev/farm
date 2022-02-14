@@ -63,9 +63,16 @@ export default {
 
   methods: {
     onMousedown(event) {
+      const value = `+${this.$formatMoney(this.$store.state.incomePerClick)}`;
+      const customYOffset = 16;
+      const symbolWidthPx = 16 * 0.28;
+      const itemValueLength = value.length;
+      const customXOffset = symbolWidthPx * itemValueLength;
+
       this.floatTextProvider.renderFloatTextItem({
-        x: event.clientX,
-        y: event.clientY,
+        value,
+        x: event.clientX - customXOffset,
+        y: event.clientY - customYOffset,
       });
 
       this.substrates.push({

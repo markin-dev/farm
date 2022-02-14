@@ -6,26 +6,18 @@
     <div
       class="game-field__main-field"
     >
-      <Scythe
-        class="scythe"
-        @mousedown-on-scythe="handleHarvest"
-      />
+      <Scythe class="scythe" />
       <div class="money">
         Money: {{ $formatMoney($store.state.money) }}
       </div>
       <div class="income-per-click">
         Income per click: {{ $formatMoney($store.state.incomePerClick) }}
       </div>
-      <div class="auto-income">
-        <div class="auto-income__value">
-          Auto income: {{ $formatMoney($store.state.autoIncome) }}
-        </div>
-        <FloatText
-          v-for="item in autoIncomeTextItems"
-          :key="item.id"
-          :text="item.value"
-          @expired="autoIncomeTextItems.shift()"
-        />
+      <div
+        ref="autoIncome"
+        style="outline: 1px solid green"
+      >
+        Auto income: {{ $formatMoney($store.state.autoIncome) }}
       </div>
     </div>
     <div class="game-field__right-menu">
@@ -36,17 +28,17 @@
 
 <script>
 import Scythe from '@/components/Scythe.vue';
-import FloatText from '@/components/FloatText.vue';
 import AnimalsShop from '@/components/AnimalsShop.vue';
 import CropsShop from '@/components/CropsShop.vue';
 
 export default {
   components: {
     Scythe,
-    FloatText,
     AnimalsShop,
     CropsShop,
   },
+
+  inject: ['floatTextProvider'],
 
   data() {
     return {
@@ -56,12 +48,15 @@ export default {
     };
   },
 
-  created() {
+  mounted() {
     this.$store.subscribeAction((action) => {
       if (action.type === 'addAutoIncomeMoney') {
-        this.autoIncomeTextItems.push({
-          id: Math.random(),
+        const coords = this.$refs.autoIncome.getBoundingClientRect();
+
+        this.floatTextProvider.renderFloatTextItem({
           value: `+${this.$formatMoney(this.$store.state.autoIncome * action.payload)}`,
+          x: coords.right,
+          y: coords.top,
         });
       }
     });
@@ -108,14 +103,6 @@ export default {
 
     .income-per-click {
       margin-bottom: 24px;
-
-      &__value {
-        margin-right: 6px;
-      }
-    }
-
-    .auto-income {
-      display: flex;
 
       &__value {
         margin-right: 6px;

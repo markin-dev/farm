@@ -41,26 +41,21 @@ export default {
   },
 
   methods: {
-    async renderFloatTextItem(e) {
+    renderFloatTextItem(e) {
       const zoneRect = this.$refs.floatTextZone.getBoundingClientRect();
 
       this.floatTextItems.push({
         id: Math.random(),
-        value: `+${this.$formatMoney(this.$store.state.incomePerClick)}`,
+        value: e.value,
         x: e.x - zoneRect.left,
         y: e.y - zoneRect.top,
       });
     },
 
     getFloatTextStyle(item) {
-      const customYOffset = this.fontSize;
-      const symbolWidthPx = this.fontSize * 0.28;
-      const itemValueLength = item.value.length;
-      const customXOffset = symbolWidthPx * itemValueLength;
-
       return {
-        top: `${item.y - customYOffset}px`,
-        left: `${item.x - customXOffset}px`,
+        top: `${item.y}px`,
+        left: `${item.x}px`,
       };
     },
   },
