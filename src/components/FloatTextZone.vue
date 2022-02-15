@@ -5,13 +5,14 @@
   >
     <FloatText
       v-for="item in floatTextItems"
+      :id="item.id"
       :key="item.id"
       :ref="`floatText${item.id}`"
       class="float-text-zone__float-text"
-      :text="item.value"
       :style="getFloatTextStyle(item)"
-      :font-size-px="fontSize"
-      @expired="floatTextItems.shift()"
+      :text="item.value"
+      :font-size-px="item.fontSize"
+      @animation-end="removeFloatTextItem"
     />
     <slot />
   </div>
@@ -36,26 +37,41 @@ export default {
   data() {
     return {
       floatTextItems: [],
-      fontSize: 16,
     };
   },
 
   methods: {
-    renderFloatTextItem(e) {
-      const zoneRect = this.$refs.floatTextZone.getBoundingClientRect();
-
+    renderFloatTextItem(event) {
       this.floatTextItems.push({
         id: Math.random(),
-        value: e.value,
-        x: e.x - zoneRect.left,
-        y: e.y - zoneRect.top,
+        value: event.value || 'default text',
+        coords: this.getTextCoords(event.coords),
+        fontSize: event.fontSize || 16,
       });
+    },
+
+    removeFloatTextItem(id) {
+      const itemIndex = this.floatTextItems.findIndex((i) => i.id === id);
+      this.floatTextItems.splice(itemIndex, 1);
+    },
+
+    getTextCoords(coords = {}) {
+      const zoneRect = this.$refs.floatTextZone.getBoundingClientRect();
+      const zoneLeft = zoneRect.left;
+      const zoneTop = zoneRect.top;
+      const initialX = coords.x || zoneLeft;
+      const initialY = coords.y || zoneTop;
+
+      return {
+        x: initialX - zoneLeft,
+        y: initialY - zoneTop,
+      };
     },
 
     getFloatTextStyle(item) {
       return {
-        top: `${item.y}px`,
-        left: `${item.x}px`,
+        top: `${item.coords.y}px`,
+        left: `${item.coords.x}px`,
       };
     },
   },
@@ -65,7 +81,6 @@ export default {
 <style lang="scss" scoped>
 .float-text-zone {
   position: relative;
-  outline: 1px solid blue;
 
   &__float-text {
     position: absolute;

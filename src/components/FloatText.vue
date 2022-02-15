@@ -22,6 +22,11 @@
 <script>
 export default {
   props: {
+    id: {
+      type: Number,
+      default: 0,
+    },
+
     text: {
       type: String,
       default: '',
@@ -40,7 +45,7 @@ export default {
 
   mounted() {
     setTimeout(() => {
-      this.$emit('expired');
+      this.$emit('animation-end', this.id);
     }, this.duration * 1000);
   },
 };
@@ -53,6 +58,7 @@ export default {
   &__value {
     position: absolute;
     display: inline-block;
+    white-space: nowrap;
     color: $green-500;
   }
 

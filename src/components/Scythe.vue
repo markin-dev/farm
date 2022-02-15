@@ -63,22 +63,33 @@ export default {
 
   methods: {
     onMousedown(event) {
+      this.$store.dispatch('harvest');
+      this.renderSubstrate();
+      this.renderIncomeFloatText(event);
+    },
+
+    renderSubstrate() {
+      this.substrates.push({
+        id: Math.random(),
+      });
+    },
+
+    renderIncomeFloatText(event) {
       const value = `+${this.$formatMoney(this.$store.state.incomePerClick)}`;
-      const customYOffset = 16;
-      const symbolWidthPx = 16 * 0.28;
+      const fontSize = 16;
+      const symbolWidthCoefficient = 0.28;
+      const symbolWidthPx = fontSize * symbolWidthCoefficient;
       const itemValueLength = value.length;
       const customXOffset = symbolWidthPx * itemValueLength;
 
       this.floatTextProvider.renderFloatTextItem({
         value,
-        x: event.clientX - customXOffset,
-        y: event.clientY - customYOffset,
+        coords: {
+          x: event.clientX - customXOffset,
+          y: event.clientY - fontSize,
+        },
+        fontSize,
       });
-
-      this.substrates.push({
-        id: Math.random(),
-      });
-      this.$emit('mousedown-on-scythe', event);
     },
   },
 };

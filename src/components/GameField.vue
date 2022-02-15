@@ -13,10 +13,7 @@
       <div class="income-per-click">
         Income per click: {{ $formatMoney($store.state.incomePerClick) }}
       </div>
-      <div
-        ref="autoIncome"
-        style="outline: 1px solid green"
-      >
+      <div ref="autoIncome">
         Auto income: {{ $formatMoney($store.state.autoIncome) }}
       </div>
     </div>
@@ -51,15 +48,25 @@ export default {
   mounted() {
     this.$store.subscribeAction((action) => {
       if (action.type === 'addAutoIncomeMoney') {
-        const coords = this.$refs.autoIncome.getBoundingClientRect();
-
-        this.floatTextProvider.renderFloatTextItem({
-          value: `+${this.$formatMoney(this.$store.state.autoIncome * action.payload)}`,
-          x: coords.right,
-          y: coords.top,
-        });
+        this.renderAutoIncomeFloatText(action);
       }
     });
+  },
+
+  methods: {
+    renderAutoIncomeFloatText(action) {
+      const autoIncomeRect = this.$refs.autoIncome.getBoundingClientRect();
+      const customYOffset = 6;
+
+      this.floatTextProvider.renderFloatTextItem({
+        value: `+${this.$formatMoney(this.$store.state.autoIncome * action.payload)}`,
+        coords: {
+          x: autoIncomeRect.right + customYOffset,
+          y: autoIncomeRect.top,
+        },
+        fontSize: 16,
+      });
+    },
   },
 };
 </script>
