@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import DevPanelHeader from '@/components/DevPanel/DevPanelHeader.vue';
+import DevPanelHeader from '@/components/devPanel/DevPanelHeader.vue';
 
 export default {
   headerHeight: 32,

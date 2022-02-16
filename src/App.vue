@@ -20,7 +20,7 @@
 import Header from '@/components/Header.vue';
 import FloatTextZone from '@/components/FloatTextZone.vue';
 import GameField from '@/components/GameField.vue';
-import DevPanel from '@/components/DevPanel/DevPanel.vue';
+import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
 
 export default {
