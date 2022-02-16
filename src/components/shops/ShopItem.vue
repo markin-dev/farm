@@ -22,29 +22,19 @@
           {{ incomeText }}
         </div>
       </div>
-      <div class="shop-item__amount">
-        <div class="shop-item__count">
-          {{ amount }}
-        </div>
-        <FloatText
-          v-for="item in floatTextItems"
-          :key="item.id"
-          :text="item.value"
-          :font-size-px="24"
-          @expired="floatTextItems.shift()"
-        />
+      <div
+        ref="itemsCount"
+        class="shop-item__count"
+      >
+        {{ amount }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import FloatText from '@/components/FloatText.vue';
-
 export default {
-  components: {
-    FloatText,
-  },
+  inject: ['floatTextProvider'],
 
   props: {
     id: {
@@ -102,9 +92,20 @@ export default {
         amount: this.numberOfPurchases,
       });
 
-      this.floatTextItems.push({
-        id: Math.random(),
+      this.renderAmountFloatText();
+    },
+
+    renderAmountFloatText() {
+      const itemsCountRect = this.$refs.itemsCount.getBoundingClientRect();
+      const customYOffset = 6;
+
+      this.floatTextProvider.renderFloatTextItem({
         value: `+${this.numberOfPurchases}`,
+        coords: {
+          x: itemsCountRect.right + customYOffset,
+          y: itemsCountRect.top,
+        },
+        fontSize: 24,
       });
     },
   },
@@ -186,12 +187,7 @@ export default {
     color: $gray-400;
   }
 
-  &__amount {
-    display: flex;
-  }
-
   &__count {
-    margin-right: 4px;
     font-size: 24px;
   }
 }
