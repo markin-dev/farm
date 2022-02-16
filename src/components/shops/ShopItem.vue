@@ -47,6 +47,12 @@ export default {
   },
 
   props: {
+    id: {
+      type: Number,
+      default: NaN,
+      required: true,
+    },
+
     name: {
       type: String,
       default: '',
@@ -91,7 +97,10 @@ export default {
         return;
       }
 
-      this.$emit('shop-item-click', this.numberOfPurchases);
+      this.$emit('shop-item-click', {
+        id: this.id,
+        amount: this.numberOfPurchases,
+      });
 
       this.floatTextItems.push({
         id: Math.random(),

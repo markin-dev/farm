@@ -25,8 +25,8 @@
 
 <script>
 import Scythe from '@/components/Scythe.vue';
-import AnimalsShop from '@/components/AnimalsShop.vue';
-import CropsShop from '@/components/CropsShop.vue';
+import AnimalsShop from '@/components/shops/AnimalsShop.vue';
+import CropsShop from '@/components/shops/CropsShop.vue';
 
 export default {
   components: {
