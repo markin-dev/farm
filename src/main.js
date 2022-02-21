@@ -101,20 +101,6 @@ const store = createStore({
     };
   },
 
-  getters: {
-    isCropDisabled: (state) => (id) => {
-      const cropItem = state.crops.find((item) => item.id === id);
-
-      return cropItem.price > state.money;
-    },
-
-    isAnimalDisabled: (state) => (id) => {
-      const animalItem = state.animals.find((item) => item.id === id);
-
-      return animalItem.price > state.money;
-    },
-  },
-
   mutations: {
     initialLoadData(state, payload) {
       this.replaceState(Object.assign(state, payload));

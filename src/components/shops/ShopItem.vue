@@ -2,7 +2,7 @@
   <div
     :class="[
       'shop-item',
-      {'shop-item_disabled': disabled},
+      {'shop-item_disabled': isDisabled},
     ]"
     @click="onClick"
   >
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   inject: ['floatTextProvider'],
 
@@ -67,11 +69,6 @@ export default {
       type: Number,
       default: 0,
     },
-
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   data() {
@@ -81,9 +78,17 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState(['money']),
+
+    isDisabled() {
+      return this.price > this.money;
+    },
+  },
+
   methods: {
     onClick() {
-      if (this.disabled) {
+      if (this.isDisabled) {
         return;
       }
 

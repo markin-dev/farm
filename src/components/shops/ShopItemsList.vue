@@ -9,7 +9,6 @@
       :price="item.price"
       :income-text="`+${$formatMoney(item.income)} auto income`"
       :amount="item.amount"
-      :disabled="$store.getters.isAnimalDisabled(item.id)"
       class="shop-items-list__item"
       @shop-item-click="$emit('shop-item-click', $event)"
     />
