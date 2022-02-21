@@ -5,12 +5,9 @@
   >
     <div
       class="f-popup__overlay"
-      @click="close"
+      @click.self="close"
     >
-      <div
-        class="f-popup__body"
-        @click.stop
-      >
+      <div class="f-popup__body">
         <div class="f-popup__header">
           <h2 class="f-popup__title">
             {{ title }}
