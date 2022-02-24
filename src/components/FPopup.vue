@@ -12,7 +12,7 @@
           <h2 class="f-popup__title">
             {{ title }}
           </h2>
-          <CloseButton @click="close" />
+          <IconButton @click="close" />
         </div>
         <div class="f-popup__content">
           <slot />
@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import CloseButton from '@/components/CloseButton.vue';
+import IconButton from '@/components/IconButton.vue';
 
 export default {
   components: {
-    CloseButton,
+    IconButton,
   },
 
   props: {
