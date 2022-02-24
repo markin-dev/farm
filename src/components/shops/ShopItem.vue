@@ -161,16 +161,16 @@ export default {
     background-size: contain;
     background-repeat: no-repeat;
 
-    @include get-icon('wheat');
-    @include get-icon('potato');
-    @include get-icon('carrot');
-    @include get-icon('corn');
-    @include get-icon('strawberry');
-    @include get-icon('chicken');
-    @include get-icon('rabbit');
-    @include get-icon('pig');
-    @include get-icon('goat');
-    @include get-icon('cow');
+    @include get-image('wheat');
+    @include get-image('potato');
+    @include get-image('carrot');
+    @include get-image('corn');
+    @include get-image('strawberry');
+    @include get-image('chicken');
+    @include get-image('rabbit');
+    @include get-image('pig');
+    @include get-image('goat');
+    @include get-image('cow');
   }
 
   &__desc {

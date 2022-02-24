@@ -9,9 +9,9 @@ $lg: 1024px;
   }
 }
 
-@mixin get-icon($icon) {
-  &-#{$icon} {
-    background-image: url('~@/assets/#{$icon}.png');
+@mixin get-image($image) {
+  &-#{$image} {
+    background-image: url('~@/assets/images/#{$image}.png');
   }
 }
 

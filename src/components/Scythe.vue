@@ -108,7 +108,7 @@ export default {
     align-items: center;
     position: absolute;
     background-color: $blue-300;
-    background-image: url('../assets/scythe_color.png');
+    background-image: url('~@/assets/images/scythe_color.png');
     background-position: center;
     background-size: 70%;
     background-repeat: no-repeat;
@@ -121,7 +121,7 @@ export default {
 
     &:hover {
       background-color: $blue-200;
-      background-image: url('../assets/scythe_white.png');
+      background-image: url('~@/assets/images/scythe_white.png');
 
       .scythe__button-icon {
         fill: white;

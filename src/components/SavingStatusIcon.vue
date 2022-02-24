@@ -5,7 +5,7 @@
   >
     <div
       v-if="$store.state.isSaving"
-      class="saving-status-icon saving-status-icon-save"
+      class="saving-status-icon"
     />
   </transition>
 </template>
@@ -17,12 +17,11 @@
   right: 8px;
   width: 32px;
   height: 32px;
+  background-image: url('~@/assets/images/save.png');
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s;
-
-  @include get-icon('save');
 
   &-enter-active {
     opacity: 1;
