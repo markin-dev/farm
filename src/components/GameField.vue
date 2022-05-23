@@ -6,7 +6,7 @@
     <div
       class="game-field__main-field"
     >
-      <Scythe class="scythe" />
+      <FScythe class="scythe" />
       <div class="money">
         Money: {{ $formatMoney($store.state.money) }}
       </div>
@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import Scythe from '@/components/Scythe.vue';
+import FScythe from '@/components/FScythe.vue';
 import AnimalsShop from '@/components/shops/AnimalsShop.vue';
 import CropsShop from '@/components/shops/CropsShop.vue';
 
 export default {
   components: {
-    Scythe,
+    FScythe,
     AnimalsShop,
     CropsShop,
   },

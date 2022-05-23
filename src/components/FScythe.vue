@@ -8,7 +8,7 @@
       class="scythe__button"
       @mousedown="onMousedown"
     />
-    <Substrate
+    <ScytheSubstrate
       v-for="item in substrates"
       :key="item.id"
       :style-object="iconStyleObject"
@@ -18,11 +18,12 @@
 </template>
 
 <script>
-import Substrate from '@/components/Substrate.vue';
+import ScytheSubstrate from '@/components/ScytheSubstrate.vue';
+import { addMoney, getMoney } from '@/newStore/useMoney';
 
 export default {
   components: {
-    Substrate,
+    ScytheSubstrate,
   },
 
   inject: ['floatTextProvider'],
@@ -66,6 +67,8 @@ export default {
       this.$store.dispatch('harvest');
       this.renderSubstrate();
       this.renderIncomeFloatText(event);
+
+      addMoney(100);
     },
 
     renderSubstrate() {
@@ -75,7 +78,8 @@ export default {
     },
 
     renderIncomeFloatText(event) {
-      const value = `+${this.$formatMoney(this.$store.state.incomePerClick)}`;
+      // const value = `+${this.$formatMoney(this.$store.state.incomePerClick)}`;
+      const value = `${getMoney.value}`;
       const fontSize = 16;
       const symbolWidthCoefficient = 0.28;
       const symbolWidthPx = fontSize * symbolWidthCoefficient;

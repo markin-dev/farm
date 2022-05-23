@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <FHeader />
     <div class="container">
       <FloatTextZone>
         <GameField />
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
+import FHeader from '@/components/FHeader.vue';
 import FloatTextZone from '@/components/FloatTextZone.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
@@ -27,7 +27,7 @@ export default {
   name: 'App',
 
   components: {
-    Header,
+    FHeader,
     FloatTextZone,
     GameField,
     DevPanel,

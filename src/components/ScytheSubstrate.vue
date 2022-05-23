@@ -1,11 +1,11 @@
 <template>
   <transition
     appear
-    name="substrate"
+    name="custom-substrate"
   >
     <div
       :style="styleObject"
-      class="substrate"
+      class="custom-substrate"
     />
   </transition>
 </template>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.substrate {
+.custom-substrate {
   position: absolute;
   background-color: $blue-100;
   border-radius: 50%;
