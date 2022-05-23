@@ -7,7 +7,7 @@
       :name="item.name"
       :icon-name="item.iconName"
       :price="item.price"
-      :income-text="`+${$formatMoney(item.income)} auto income`"
+      :income-text="`+${$formatMoney(item.income)} ${incomeText}`"
       :amount="item.amount"
       class="shop-items-list__item"
       @shop-item-click="$emit('shop-item-click', $event)"
@@ -27,6 +27,11 @@ export default {
     items: {
       type: Array,
       default: () => [],
+    },
+
+    incomeText: {
+      type: String,
+      default: '',
     },
   },
 };

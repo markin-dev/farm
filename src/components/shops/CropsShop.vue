@@ -3,6 +3,7 @@
     <h3>Crops Shop</h3>
     <ShopItemsList
       :items="crops"
+      income-text="per click"
       @shop-item-click="buyCrop"
     />
   </div>

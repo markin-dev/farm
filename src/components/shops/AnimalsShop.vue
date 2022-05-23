@@ -3,6 +3,7 @@
     <h3>Animals Shop</h3>
     <ShopItemsList
       :items="animals"
+      income-text="auto income"
       @shop-item-click="buyAnimal"
     />
   </div>
