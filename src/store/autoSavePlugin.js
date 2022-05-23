@@ -1,4 +1,4 @@
-import { save, load } from '@/saveLoad';
+import { save, load } from '@/store/saveLoad';
 
 const AUTOSAVE_DELAY_MS = 10000;
 

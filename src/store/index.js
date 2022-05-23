@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
-import autosavePlugin from '@/autoSavePlugin';
-import gameLoopPlugin from '@/gameLoopPlugin';
+import autosavePlugin from '@/store/autoSavePlugin';
+import gameLoopPlugin from '@/store/gameLoopPlugin';
 
 const store = createStore({
   state() {

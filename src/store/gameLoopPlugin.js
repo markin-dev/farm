@@ -1,4 +1,4 @@
-import { save } from '@/saveLoad';
+import { save } from '@/store/saveLoad';
 
 const DEFAULT_GAME_TICK_MS = 1000;
 const IDLE_GAME_LOOP_INTERVAL_MS = 5000;
