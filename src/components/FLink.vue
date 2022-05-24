@@ -18,6 +18,7 @@ export default {
 <style lang="scss" scoped>
 .f-link {
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     color: $gray-500;
