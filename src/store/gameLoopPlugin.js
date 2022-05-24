@@ -1,4 +1,4 @@
-import { save } from '@/store/saveLoad';
+import { save } from '@/newStore/saveLoad';
 
 const DEFAULT_GAME_TICK_MS = 1000;
 const IDLE_GAME_LOOP_INTERVAL_MS = 5000;
@@ -34,13 +34,15 @@ const startIdleGameLoop = (store) => {
     const numberOfGameTicks = (nowMs - lastTickMs) / DEFAULT_GAME_TICK_MS;
 
     makeNumberOfGameTicks(Math.floor(numberOfGameTicks), store);
+
     save(store);
+
     lastTickMs = nowMs;
   }, IDLE_GAME_LOOP_INTERVAL_MS);
 };
 
 const gameLoopPlugin = (store) => {
-  startActiveGameLoop(store);
+  // startActiveGameLoop(store);
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

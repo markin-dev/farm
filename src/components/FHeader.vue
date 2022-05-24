@@ -25,7 +25,7 @@
 <script>
 import FLink from '@/components/FLink.vue';
 import AboutModal from '@/components/AboutModal.vue';
-import { save } from '@/store/saveLoad';
+import { save } from '@/newStore/saveLoad';
 
 export default {
   components: {

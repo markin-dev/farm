@@ -19,7 +19,7 @@
 
 <script>
 import ScytheSubstrate from '@/components/ScytheSubstrate.vue';
-import { addMoney, getMoney } from '@/newStore/useMoney';
+import { harvest, getIncomePerClick } from '@/newStore';
 
 export default {
   components: {
@@ -64,11 +64,9 @@ export default {
 
   methods: {
     onMousedown(event) {
-      this.$store.dispatch('harvest');
+      harvest();
       this.renderSubstrate();
       this.renderIncomeFloatText(event);
-
-      addMoney(100);
     },
 
     renderSubstrate() {
@@ -78,8 +76,7 @@ export default {
     },
 
     renderIncomeFloatText(event) {
-      // const value = `+${this.$formatMoney(this.$store.state.incomePerClick)}`;
-      const value = `${getMoney.value}`;
+      const value = `${this.$formatMoney(getIncomePerClick.value)}`;
       const fontSize = 16;
       const symbolWidthCoefficient = 0.28;
       const symbolWidthPx = fontSize * symbolWidthCoefficient;

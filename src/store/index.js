@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import autosavePlugin from '@/store/autoSavePlugin';
+// import autosavePlugin from '@/store/autoSavePlugin';
 import gameLoopPlugin from '@/store/gameLoopPlugin';
 
 const store = createStore({
@@ -179,7 +179,7 @@ const store = createStore({
   },
 
   plugins: [
-    autosavePlugin,
+    // autosavePlugin,
     gameLoopPlugin,
   ],
 });
