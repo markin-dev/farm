@@ -11,7 +11,7 @@
       >
         <pre>{{ $store.state }}</pre>
       </DevPanel>
-      <SavingStatusIcon />
+      <SavingStatusController />
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ import FHeader from '@/components/FHeader.vue';
 import FloatTextZone from '@/components/FloatTextZone.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
-import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
+import SavingStatusController from '@/components/SavingStatusController.vue';
 
 export default {
   name: 'App',
@@ -31,7 +31,7 @@ export default {
     FloatTextZone,
     GameField,
     DevPanel,
-    SavingStatusIcon,
+    SavingStatusController,
   },
 
   data() {

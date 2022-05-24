@@ -4,11 +4,38 @@
     name="saving-status-icon"
   >
     <div
-      v-if="$store.state.isSaving"
       class="saving-status-icon"
+      :style="{transition: `all ${$options.animationDurationSec}s`}"
     />
   </transition>
 </template>
+
+<script>
+export default {
+  props: {
+    animationDurationSec: {
+      type: Number,
+      default: 1,
+    },
+  },
+
+  data() {
+    return {
+      timeout: 0,
+    };
+  },
+
+  mounted() {
+    this.timeout = setTimeout(() => {
+      this.$emit('animation-end');
+    }, this.animationDurationSec * 1000);
+  },
+
+  unmounted() {
+    clearTimeout(this.timeout);
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .saving-status-icon {
