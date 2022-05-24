@@ -2,7 +2,7 @@
   <div class="crops-shop">
     <h3>Crops Shop</h3>
     <ShopItemsList
-      :items="crops"
+      :items="$options.getCrops.value"
       income-text="per click"
       @shop-item-click="buyCrop"
     />
@@ -10,21 +10,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import ShopItemsList from '@/components/shops/ShopItemsList.vue';
+import { buyCrop, getCrops } from '@/newStore';
 
 export default {
+  getCrops,
+
   components: {
     ShopItemsList,
   },
 
-  computed: {
-    ...mapState(['crops']),
-  },
-
   methods: {
     buyCrop(event) {
-      this.$store.dispatch('buyCrop', event);
+      buyCrop(event);
     },
   },
 };

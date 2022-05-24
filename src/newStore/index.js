@@ -2,10 +2,10 @@ import { ref, computed } from 'vue';
 import mitt from 'mitt';
 
 const store = ref({
-  money: 0,
+  money: 10000,
   totalMoney: 0,
   incomePerClick: 1,
-  autoIncome: 1000,
+  autoIncome: 0,
   eventBus: mitt(),
   crops: [
     {
@@ -97,8 +97,32 @@ function addMoney(value) {
   store.value.money += value;
 }
 
+function subtractMoney(value) {
+  store.value.money -= value;
+}
+
 function addTotalMoney(value) {
   store.value.totalMoney += value;
+}
+
+function addAutoIncome(value) {
+  store.value.autoIncome += value;
+}
+
+function addIncomePerClick(value) {
+  store.value.incomePerClick += value;
+}
+
+function increaseAnimalPrice(id) {
+  const animalItem = store.value.animals.find((item) => item.id === id);
+
+  animalItem.price = Math.round(animalItem.price * 1.5);
+}
+
+function increaseCropPrice(id) {
+  const cropItem = store.value.crops.find((item) => item.id === id);
+
+  cropItem.price = Math.round(cropItem.price * 1.4);
 }
 
 function initialLoadData(loadedStore) {
@@ -116,9 +140,37 @@ function harvest() {
   addTotalMoney(store.value.incomePerClick);
 }
 
+function addAnimals(payload) {
+  const animalItem = store.value.animals.find((item) => item.id === payload.id);
+
+  animalItem.amount += payload.amount;
+}
+
+function addCrops(payload) {
+  const cropItem = store.value.crops.find((item) => item.id === payload.id);
+
+  cropItem.amount += payload.amount;
+}
+
 function addAutoIncomeMoney(multiplier) {
   addMoney(store.value.autoIncome * multiplier);
   store.value.eventBus.emit('added-auto-income', store.value.autoIncome * multiplier);
+}
+
+function buyAnimal(payload) {
+  const animalItem = store.value.animals.find((item) => item.id === payload.id);
+  subtractMoney(animalItem.price);
+  addAnimals(payload);
+  addAutoIncome(animalItem.income * payload.amount);
+  increaseAnimalPrice(payload.id);
+}
+
+function buyCrop(payload) {
+  const cropItem = store.value.crops.find((item) => item.id === payload.id);
+  subtractMoney(cropItem.price);
+  addCrops(payload);
+  addIncomePerClick(cropItem.income * payload.amount);
+  increaseCropPrice(payload.id);
 }
 
 const getStore = computed(() => store.value);
@@ -126,6 +178,8 @@ const getMoney = computed(() => store.value.money);
 const getIncomePerClick = computed(() => store.value.incomePerClick);
 const getAutoIncome = computed(() => store.value.autoIncome);
 const getEventBus = computed(() => store.value.eventBus);
+const getAnimals = computed(() => store.value.animals);
+const getCrops = computed(() => store.value.crops);
 
 export {
   getStore,
@@ -136,4 +190,8 @@ export {
   getIncomePerClick,
   getAutoIncome,
   getEventBus,
+  buyAnimal,
+  getAnimals,
+  buyCrop,
+  getCrops,
 };

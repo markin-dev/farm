@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { getMoney } from '@/newStore';
 
 export default {
   inject: ['floatTextProvider'],
@@ -79,10 +79,8 @@ export default {
   },
 
   computed: {
-    ...mapState(['money']),
-
     isDisabled() {
-      return this.price > this.money;
+      return this.price > getMoney.value;
     },
   },
 

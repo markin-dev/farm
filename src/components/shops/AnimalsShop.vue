@@ -2,7 +2,7 @@
   <div class="animals-shop">
     <h3>Animals Shop</h3>
     <ShopItemsList
-      :items="animals"
+      :items="$options.getAnimals.value"
       income-text="auto income"
       @shop-item-click="buyAnimal"
     />
@@ -10,21 +10,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import ShopItemsList from '@/components/shops/ShopItemsList.vue';
+import { buyAnimal, getAnimals } from '@/newStore';
 
 export default {
+  getAnimals,
+
   components: {
     ShopItemsList,
   },
 
-  computed: {
-    ...mapState(['animals']),
-  },
-
   methods: {
     buyAnimal(event) {
-      this.$store.dispatch('buyAnimal', event);
+      buyAnimal(event);
     },
   },
 };
