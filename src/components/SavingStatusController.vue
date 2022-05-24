@@ -8,7 +8,7 @@
 <script>
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
 
-import { getEventBus } from '@/newStore';
+import { getEventBus } from '@/store';
 
 const eventBus = getEventBus.value;
 

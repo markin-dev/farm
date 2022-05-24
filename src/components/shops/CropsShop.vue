@@ -11,7 +11,8 @@
 
 <script>
 import ShopItemsList from '@/components/shops/ShopItemsList.vue';
-import { buyCrop, getCrops } from '@/newStore';
+import { getCrops } from '@/store';
+import { buyCrop } from '@/store/actions';
 
 export default {
   getCrops,

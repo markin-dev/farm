@@ -2,12 +2,11 @@ import {
   save,
   load,
   startAutosave,
-} from '@/newStore/saveLoad';
+} from '@/store/saveLoad';
 
-import {
-  getAutoIncome,
-  addAutoIncomeMoney,
-} from '@/newStore';
+import { getAutoIncome } from '@/store';
+
+import { addAutoIncomeMoney } from '@/store/actions';
 
 const DEFAULT_GAME_TICK_MS = 1000;
 const IDLE_GAME_LOOP_INTERVAL_MS = 5000;

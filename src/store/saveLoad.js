@@ -2,7 +2,7 @@ import AES from 'crypto-js/aes';
 import Utf8 from 'crypto-js/enc-utf8';
 import getSecretKey from '@/utils/getSecretKey';
 
-import { getStore, getEventBus, initialLoadData } from '@/newStore';
+import { getStore, getEventBus, initialLoadData } from '@/store';
 
 const STORAGE_KEY = 'farmSave';
 const SECRET_KEY = getSecretKey();

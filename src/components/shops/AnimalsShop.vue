@@ -11,7 +11,8 @@
 
 <script>
 import ShopItemsList from '@/components/shops/ShopItemsList.vue';
-import { buyAnimal, getAnimals } from '@/newStore';
+import { getAnimals } from '@/store';
+import { buyAnimal } from '@/store/actions';
 
 export default {
   getAnimals,

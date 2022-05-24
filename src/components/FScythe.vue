@@ -19,7 +19,8 @@
 
 <script>
 import ScytheSubstrate from '@/components/ScytheSubstrate.vue';
-import { harvest, getIncomePerClick } from '@/newStore';
+import { harvest } from '@/store/actions';
+import { getIncomePerClick } from '@/store';
 
 export default {
   components: {

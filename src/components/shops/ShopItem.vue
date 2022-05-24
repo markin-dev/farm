@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getMoney } from '@/newStore';
+import { getMoney } from '@/store';
 
 export default {
   inject: ['floatTextProvider'],

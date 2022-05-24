@@ -32,7 +32,7 @@ import {
   getIncomePerClick,
   getAutoIncome,
   getEventBus,
-} from '@/newStore';
+} from '@/store';
 
 const eventBus = getEventBus.value;
 
