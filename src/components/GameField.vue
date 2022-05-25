@@ -66,6 +66,10 @@ export default {
 
   methods: {
     onAddedAutoIncome(event) {
+      if (!event) {
+        return;
+      }
+
       this.renderAutoIncomeFloatText(event);
     },
 
