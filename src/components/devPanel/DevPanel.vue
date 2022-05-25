@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="!off"
     class="dev-panel"
     :style="styleObject"
   >
@@ -28,13 +27,6 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 import DevPanelHeader from '@/components/devPanel/DevPanelHeader.vue';
-
-defineProps({
-  off: {
-    type: Boolean,
-    default: false,
-  },
-});
 
 const HEADER_HEIGHT = 32;
 const offsetTop = ref(0);

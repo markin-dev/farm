@@ -1,7 +1,11 @@
 <template>
   <div class="game-field">
     <div class="game-field__left-menu">
-      <AnimalsShop />
+      <FShop
+        title="Animals Shop"
+        :items="animals"
+        @shop-item-click="buyAnimal"
+      />
     </div>
     <div
       class="game-field__main-field"
@@ -15,18 +19,22 @@
       </p>
     </div>
     <div class="game-field__right-menu">
-      <CropsShop />
+      <FShop
+        title="Crops Shop"
+        :items="crops"
+        @shop-item-click="buyCrop"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
+import { buyAnimal, buyCrop } from '@/store/actions';
 import useStore from '@/store/useStore';
 import useFloatText from '@/components/floatText/useFloatText';
 import FScythe from '@/components/FScythe.vue';
-import AnimalsShop from '@/components/shops/AnimalsShop.vue';
-import CropsShop from '@/components/shops/CropsShop.vue';
+import FShop from '@/components/shops/FShop.vue';
 import formatMoney from '@/utils/formatMoney';
 import getAbsoluteCoords from '@/utils/getAbsoluteCoords';
 
@@ -36,6 +44,8 @@ const {
   incomePerClick,
   autoIncome,
   eventBus,
+  animals,
+  crops,
 } = useStore();
 const { addFloatTextItem } = useFloatText();
 const autoIncomeRef = ref(null);

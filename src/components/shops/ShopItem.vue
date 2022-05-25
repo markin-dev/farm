@@ -36,9 +36,9 @@
 import { ref, computed } from 'vue';
 import useStore from '@/store/useStore';
 import useFloatText from '@/components/floatText/useFloatText';
+import getAbsoluteCoords from '@/utils/getAbsoluteCoords';
 
 const { money } = useStore();
-
 const props = defineProps({
   id: {
     type: Number,
@@ -83,10 +83,10 @@ function renderAmountFloatText() {
 
   addFloatTextItem({
     value: `+${NUMBER_OF_PURCHASES}`,
-    coords: {
-      x: itemsCountRect.right + customYOffset,
-      y: itemsCountRect.top,
-    },
+    coords: getAbsoluteCoords(
+      itemsCountRect.right + customYOffset,
+      itemsCountRect.top,
+    ),
     fontSize: 24,
   });
 }
