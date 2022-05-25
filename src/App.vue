@@ -5,52 +5,37 @@
       <FloatTextOverlay />
       <GameField />
       <DevPanel
-        v-if="isDevPanel"
-        @close="isDevPanel = false"
+        v-if="isDevPanelShowed"
+        @close="isDevPanelShowed = false"
       >
-        <pre>{{ $store.state }}</pre>
+        <pre>{{ store }}</pre>
       </DevPanel>
       <SavingStatusController />
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { getStore } from '@/store';
 import FHeader from '@/components/FHeader.vue';
 import FloatTextOverlay from '@/components/floatText/FloatTextOverlay.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
 
-export default {
-  name: 'App',
+const isDevPanelShowed = ref(false);
+const store = getStore.value;
 
-  components: {
-    FHeader,
-    FloatTextOverlay,
-    GameField,
-    DevPanel,
-    SavingStatusController,
-  },
+function handleKeydown(event) {
+  if (event.code === 'KeyD' && event.shiftKey) {
+    isDevPanelShowed.value = !isDevPanelShowed.value;
+  }
+}
 
-  data() {
-    return {
-      isDevPanel: false,
-    };
-  },
-
-  mounted() {
-    document.addEventListener('keydown', this.handleKeydown);
-  },
-
-  methods: {
-    handleKeydown(event) {
-      if (event.code === 'KeyD' && event.shiftKey) {
-        this.isDevPanel = !this.isDevPanel;
-      }
-    },
-  },
-};
+onMounted(() => {
+  document.addEventListener('keydown', handleKeydown);
+});
 </script>
 
 <style lang="scss" scoped>
