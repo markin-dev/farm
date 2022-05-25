@@ -6,12 +6,12 @@
     <div
       class="game-field__main-field"
     >
-      <h3>Total farm cost: {{ $formatMoney($options.getTotalMoney.value) }}</h3>
+      <h3>Total farm cost: {{ $formatMoney(getTotalMoney) }}</h3>
       <FScythe class="scythe" />
-      <p>Money: {{ $formatMoney($options.getMoney.value) }}</p>
-      <p>Income per click: {{ $formatMoney($options.getIncomePerClick.value) }}</p>
+      <p>Money: {{ $formatMoney(getMoney) }}</p>
+      <p>Income per click: {{ $formatMoney(getIncomePerClick) }}</p>
       <p ref="autoIncome">
-        Auto income: {{ $formatMoney($options.getAutoIncome.value) }}
+        Auto income: {{ $formatMoney(getAutoIncome) }}
       </p>
     </div>
     <div class="game-field__right-menu">
@@ -20,7 +20,8 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { onMounted, onUnmounted } from 'vue';
 import FScythe from '@/components/FScythe.vue';
 import AnimalsShop from '@/components/shops/AnimalsShop.vue';
 import CropsShop from '@/components/shops/CropsShop.vue';
@@ -34,60 +35,38 @@ import {
 
 const eventBus = getEventBus.value;
 
-export default {
-  getMoney,
-  getTotalMoney,
-  getIncomePerClick,
-  getAutoIncome,
+function renderAutoIncomeFloatText(value) {
+  // const autoIncomeRect = this.$refs.autoIncome.getBoundingClientRect();
+  // const customYOffset = 6;
 
-  components: {
-    FScythe,
-    AnimalsShop,
-    CropsShop,
-  },
+  console.log('render float text: ', value);
 
-  inject: ['floatTextProvider'],
+  // this.floatTextProvider.renderFloatTextItem({
+  //   value: `+${this.$formatMoney(value)}`,
+  //   coords: {
+  //     x: autoIncomeRect.right + customYOffset,
+  //     y: autoIncomeRect.top,
+  //   },
+  //   fontSize: 16,
+  // });
+}
 
-  data() {
-    return {
-      crops: 0,
-      incomeTextItems: [],
-      autoIncomeTextItems: [],
-    };
-  },
+function onAddedAutoIncome(event) {
+  if (!event) {
+    return;
+  }
 
-  mounted() {
-    eventBus.on('added-auto-income', this.onAddedAutoIncome);
-  },
+  renderAutoIncomeFloatText(event);
+}
 
-  unmounted() {
-    eventBus.off('added-auto-income', this.onAddedAutoIncome);
-  },
+onMounted(() => {
+  eventBus.on('added-auto-income', onAddedAutoIncome);
+});
 
-  methods: {
-    onAddedAutoIncome(event) {
-      if (!event) {
-        return;
-      }
+onUnmounted(() => {
+  eventBus.off('added-auto-income', onAddedAutoIncome);
+});
 
-      this.renderAutoIncomeFloatText(event);
-    },
-
-    renderAutoIncomeFloatText(value) {
-      const autoIncomeRect = this.$refs.autoIncome.getBoundingClientRect();
-      const customYOffset = 6;
-
-      this.floatTextProvider.renderFloatTextItem({
-        value: `+${this.$formatMoney(value)}`,
-        coords: {
-          x: autoIncomeRect.right + customYOffset,
-          y: autoIncomeRect.top,
-        },
-        fontSize: 16,
-      });
-    },
-  },
-};
 </script>
 
 <style lang="scss" scoped>
