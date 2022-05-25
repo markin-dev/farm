@@ -25,7 +25,7 @@ import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
 
 const isDevPanelShowed = ref(false);
-const { store } = useStore();
+const store = useStore();
 
 function handleKeydown(event) {
   if (event.code === 'KeyD' && event.shiftKey) {
