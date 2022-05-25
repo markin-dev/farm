@@ -25,20 +25,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    height: {
-      type: Number,
-      default: 32,
-    },
-
-    isMinimized: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+defineProps({
+  height: {
+    type: Number,
+    default: 32,
   },
-};
+
+  isMinimized: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

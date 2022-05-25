@@ -6,7 +6,7 @@
   >
     <DevPanelHeader
       :is-minimized="isMinimized"
-      :height="$options.headerHeight"
+      :height="HEADER_HEIGHT"
       @mousedown.self="startDrag"
       @close-button-click="$emit('close')"
       @minimize-button-click="toggleMinimized"
@@ -25,147 +25,129 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed, ref, onMounted } from 'vue';
 import DevPanelHeader from '@/components/devPanel/DevPanelHeader.vue';
 
-export default {
-  headerHeight: 32,
-
-  components: {
-    DevPanelHeader,
+defineProps({
+  off: {
+    type: Boolean,
+    default: false,
   },
+});
 
-  props: {
-    off: {
-      type: Boolean,
-      default: false,
-    },
-  },
+const HEADER_HEIGHT = 32;
+const offsetTop = ref(0);
+const offsetLeft = ref(0);
+const shiftX = ref(0);
+const shiftY = ref(0);
+const panelWidth = ref(300);
+const panelHeight = ref(400);
+const panelHeightForMaximize = ref(0);
+const gapFromBounds = ref(8);
+const isMinimized = ref(false);
 
-  data() {
-    return {
-      offsetTop: 0,
-      offsetLeft: 0,
-      shiftX: 0,
-      shiftY: 0,
-      panelWidth: 300,
-      panelHeight: 400,
-      panelHeightForMaximize: 0,
-      gapFromBounds: 8,
-      isMinimized: false,
-    };
-  },
+const styleObject = computed(() => ({
+  top: `${offsetTop.value}px`,
+  left: `${offsetLeft.value}px`,
+  width: `${panelWidth.value}px`,
+  height: `${panelHeight.value}px`,
+  minHeight: `${HEADER_HEIGHT + 32}px`,
+}));
 
-  computed: {
-    styleObject() {
-      return {
-        top: `${this.offsetTop}px`,
-        left: `${this.offsetLeft}px`,
-        width: `${this.panelWidth}px`,
-        height: `${this.panelHeight}px`,
-        minHeight: `${this.$options.headerHeight + 32}px`,
-      };
-    },
+const isOutOfBoundsAlongX = computed(
+  () => offsetLeft.value + panelWidth.value + gapFromBounds.value > window.innerWidth,
+);
+const isOutOfBoundsAlongY = computed(
+  () => offsetTop.value + panelHeight.value + gapFromBounds.value > window.innerHeight,
+);
 
-    isOutOfBoundsAlongX() {
-      return this.offsetLeft + this.panelWidth + this.gapFromBounds > window.innerWidth;
-    },
+function checkoutOfBoundsForDrag() {
+  if (offsetLeft.value < gapFromBounds.value) {
+    offsetLeft.value = gapFromBounds.value;
+  }
+  if (offsetTop.value < gapFromBounds.value) {
+    offsetTop.value = gapFromBounds.value;
+  }
+  if (isOutOfBoundsAlongX.value) {
+    offsetLeft.value = window.innerWidth - panelWidth.value - gapFromBounds.value;
+  }
+  if (isOutOfBoundsAlongY.value) {
+    offsetTop.value = window.innerHeight - panelHeight.value - gapFromBounds.value;
+  }
+}
 
-    isOutOfBoundsAlongY() {
-      return this.offsetTop + this.panelHeight + this.gapFromBounds > window.innerHeight;
-    },
-  },
+function checkoutOfBoundsForScale() {
+  if (isOutOfBoundsAlongX.value) {
+    panelWidth.value = window.innerWidth - offsetLeft.value - gapFromBounds.value;
+  }
+  if (isOutOfBoundsAlongY.value) {
+    panelHeight.value = window.innerHeight - offsetTop.value - gapFromBounds.value;
+  }
+}
 
-  mounted() {
-    this.setDefaultPanelPosition();
-  },
+function setDefaultPanelPosition() {
+  offsetTop.value = window.innerHeight - panelHeight.value;
+  offsetLeft.value = 0;
 
-  methods: {
-    setDefaultPanelPosition() {
-      this.offsetTop = window.innerHeight - this.panelHeight;
-      this.offsetLeft = 0;
+  checkoutOfBoundsForDrag();
+}
 
-      this.checkoutOfBoundsForDrag();
-    },
+onMounted(() => {
+  setDefaultPanelPosition();
+});
 
-    startDrag(event) {
-      document.onmousemove = this.dragElement;
-      document.onmouseup = this.removeDocumentEvents;
+function dragElement(event) {
+  event.preventDefault();
 
-      this.shiftX = event.clientX - this.offsetLeft;
-      this.shiftY = event.clientY - this.offsetTop;
-    },
+  offsetLeft.value = event.clientX - shiftX.value;
+  offsetTop.value = event.clientY - shiftY.value;
 
-    dragElement(event) {
-      event.preventDefault();
+  checkoutOfBoundsForDrag();
+}
 
-      this.offsetLeft = event.clientX - this.shiftX;
-      this.offsetTop = event.clientY - this.shiftY;
+function removeDocumentEvents() {
+  document.onmouseup = null;
+  document.onmousemove = null;
+}
 
-      this.checkoutOfBoundsForDrag();
-    },
+function startDrag(event) {
+  document.onmousemove = dragElement;
+  document.onmouseup = removeDocumentEvents;
 
-    startScale(event) {
-      document.onmousemove = this.scaleElement;
-      document.onmouseup = this.removeDocumentEvents;
+  shiftX.value = event.clientX - offsetLeft.value;
+  shiftY.value = event.clientY - offsetTop.value;
+}
 
-      this.shiftX = event.clientX - this.panelWidth;
-      this.shiftY = event.clientY - this.panelHeight;
-    },
+function scaleElement(event) {
+  event.preventDefault();
 
-    scaleElement(event) {
-      event.preventDefault();
+  panelWidth.value = event.clientX - shiftX.value;
+  panelHeight.value = event.clientY - shiftY.value;
+  checkoutOfBoundsForScale();
+}
 
-      this.panelWidth = event.clientX - this.shiftX;
-      this.panelHeight = event.clientY - this.shiftY;
+function startScale(event) {
+  document.onmousemove = scaleElement;
+  document.onmouseup = removeDocumentEvents;
 
-      this.checkoutOfBoundsForScale();
-    },
+  shiftX.value = event.clientX - panelWidth.value;
+  shiftY.value = event.clientY - panelHeight.value;
+}
 
-    removeDocumentEvents() {
-      document.onmouseup = null;
-      document.onmousemove = null;
-    },
+function toggleMinimized() {
+  if (isMinimized.value) {
+    offsetTop.value -= panelHeightForMaximize.value - HEADER_HEIGHT;
+    panelHeight.value = panelHeightForMaximize.value;
+  } else {
+    offsetTop.value += panelHeight.value - HEADER_HEIGHT;
+    panelHeightForMaximize.value = panelHeight.value;
+    panelHeight.value = HEADER_HEIGHT;
+  }
 
-    checkoutOfBoundsForDrag() {
-      if (this.offsetLeft < this.gapFromBounds) {
-        this.offsetLeft = this.gapFromBounds;
-      }
-      if (this.offsetTop < this.gapFromBounds) {
-        this.offsetTop = this.gapFromBounds;
-      }
-      if (this.isOutOfBoundsAlongX) {
-        this.offsetLeft = window.innerWidth - this.panelWidth - this.gapFromBounds;
-      }
-      if (this.isOutOfBoundsAlongY) {
-        this.offsetTop = window.innerHeight - this.panelHeight - this.gapFromBounds;
-      }
-    },
-
-    checkoutOfBoundsForScale() {
-      if (this.isOutOfBoundsAlongX) {
-        this.panelWidth = window.innerWidth - this.offsetLeft - this.gapFromBounds;
-      }
-      if (this.isOutOfBoundsAlongY) {
-        this.panelHeight = window.innerHeight - this.offsetTop - this.gapFromBounds;
-      }
-    },
-
-    toggleMinimized() {
-      if (this.isMinimized) {
-        this.offsetTop -= this.panelHeightForMaximize - this.$options.headerHeight;
-        this.panelHeight = this.panelHeightForMaximize;
-      } else {
-        this.offsetTop += this.panelHeight - this.$options.headerHeight;
-        this.panelHeightForMaximize = this.panelHeight;
-        this.panelHeight = this.$options.headerHeight;
-      }
-
-      this.isMinimized = !this.isMinimized;
-      this.checkoutOfBoundsForDrag();
-    },
-  },
-};
+  isMinimized.value = !isMinimized.value;
+  checkoutOfBoundsForDrag();
+}
 </script>
 
 <style lang="scss" scoped>
