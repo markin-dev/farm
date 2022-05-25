@@ -19,36 +19,38 @@
   </transition>
 </template>
 
-<script>
-export default {
-  props: {
-    id: {
-      type: Number,
-      default: 0,
-    },
+<script setup>
+import { onMounted } from 'vue';
 
-    text: {
-      type: String,
-      default: '',
-    },
-
-    duration: {
-      type: Number,
-      default: 0.6,
-    },
-
-    fontSizePx: {
-      type: Number,
-      default: 16,
-    },
+const props = defineProps({
+  id: {
+    type: Number,
+    default: 0,
   },
 
-  mounted() {
-    setTimeout(() => {
-      this.$emit('animation-end', this.id);
-    }, this.duration * 1000);
+  text: {
+    type: String,
+    default: '',
   },
-};
+
+  duration: {
+    type: Number,
+    default: 0.6,
+  },
+
+  fontSizePx: {
+    type: Number,
+    default: 16,
+  },
+});
+const emits = defineEmits(['animation-end']);
+
+onMounted(() => {
+  setTimeout(() => {
+    emits('animation-end', props.id);
+  }, props.duration * 1000);
+});
+
 </script>
 
 <style lang="scss" scoped>
