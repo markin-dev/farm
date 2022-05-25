@@ -1,7 +1,6 @@
 import {
   getStore,
   addMoney,
-  addTotalMoney,
   subtractMoney,
   addAnimals,
   addAutoIncome,
@@ -15,7 +14,6 @@ const store = getStore.value;
 
 function harvest() {
   addMoney(store.incomePerClick);
-  addTotalMoney(store.incomePerClick);
 }
 
 function addAutoIncomeMoney(multiplier) {

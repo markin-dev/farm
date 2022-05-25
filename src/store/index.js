@@ -3,7 +3,7 @@ import mitt from 'mitt';
 
 const store = ref({
   money: 10000,
-  totalMoney: 0,
+  totalMoney: 10000,
   incomePerClick: 1,
   autoIncome: 0,
   eventBus: mitt(),
@@ -95,6 +95,7 @@ const store = ref({
 
 const getStore = computed(() => store.value);
 const getMoney = computed(() => store.value.money);
+const getTotalMoney = computed(() => store.value.totalMoney);
 const getIncomePerClick = computed(() => store.value.incomePerClick);
 const getAutoIncome = computed(() => store.value.autoIncome);
 const getEventBus = computed(() => store.value.eventBus);
@@ -113,14 +114,11 @@ function initialLoadData(loadedStore) {
 
 function addMoney(value) {
   store.value.money += value;
+  store.value.totalMoney += value;
 }
 
 function subtractMoney(value) {
   store.value.money -= value;
-}
-
-function addTotalMoney(value) {
-  store.value.totalMoney += value;
 }
 
 function addAutoIncome(value) {
@@ -158,6 +156,7 @@ function increaseCropPrice(id) {
 export {
   getStore,
   getMoney,
+  getTotalMoney,
   getIncomePerClick,
   getAutoIncome,
   getEventBus,
@@ -166,7 +165,6 @@ export {
   initialLoadData,
   addMoney,
   subtractMoney,
-  addTotalMoney,
   addAutoIncome,
   addIncomePerClick,
   addAnimals,

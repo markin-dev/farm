@@ -6,16 +6,13 @@
     <div
       class="game-field__main-field"
     >
+      <h3>Total farm cost: {{ $formatMoney($options.getTotalMoney.value) }}</h3>
       <FScythe class="scythe" />
-      <div class="money">
-        Money: {{ $formatMoney($options.getMoney.value) }}
-      </div>
-      <div class="income-per-click">
-        Income per click: {{ $formatMoney($options.getIncomePerClick.value) }}
-      </div>
-      <div ref="autoIncome">
+      <p>Money: {{ $formatMoney($options.getMoney.value) }}</p>
+      <p>Income per click: {{ $formatMoney($options.getIncomePerClick.value) }}</p>
+      <p ref="autoIncome">
         Auto income: {{ $formatMoney($options.getAutoIncome.value) }}
-      </div>
+      </p>
     </div>
     <div class="game-field__right-menu">
       <CropsShop />
@@ -29,6 +26,7 @@ import AnimalsShop from '@/components/shops/AnimalsShop.vue';
 import CropsShop from '@/components/shops/CropsShop.vue';
 import {
   getMoney,
+  getTotalMoney,
   getIncomePerClick,
   getAutoIncome,
   getEventBus,
@@ -38,6 +36,7 @@ const eventBus = getEventBus.value;
 
 export default {
   getMoney,
+  getTotalMoney,
   getIncomePerClick,
   getAutoIncome,
 
@@ -115,21 +114,8 @@ export default {
       margin-bottom: 24px;
     }
 
-    .money {
-      display: flex;
-      margin-bottom: 24px;
-
-      &__count {
-        margin-right: 6px;
-      }
-    }
-
-    .income-per-click {
-      margin-bottom: 24px;
-
-      &__value {
-        margin-right: 6px;
-      }
+    p {
+      margin-bottom: 12px;
     }
   }
 
