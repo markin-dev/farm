@@ -6,7 +6,7 @@
     <div
       :style="iconStyleObject"
       class="scythe__button"
-      @mousedown="onMousedown"
+      @mousedown="onMouseDown"
     />
     <ScytheSubstrate
       v-for="item in substrates"
@@ -17,84 +17,67 @@
   </div>
 </template>
 
-<script>
-import ScytheSubstrate from '@/components/ScytheSubstrate.vue';
+<script setup>
+import { ref, computed } from 'vue';
 import { harvest } from '@/store/actions';
 import { getIncomePerClick } from '@/store';
+import useFloatText from '@/components/floatText/useFloatText';
+import ScytheSubstrate from '@/components/ScytheSubstrate.vue';
+import formatMoney from '@/utils/formatMoney';
 
-export default {
-  components: {
-    ScytheSubstrate,
+const substrates = ref([]);
+const props = defineProps({
+  size: {
+    type: Number,
+    default: 360,
   },
+});
+const { addFloatTextItem } = useFloatText();
+const scytheStyleObject = computed(() => ({
+  width: `${props.size}px`,
+  height: `${props.size}px`,
+}));
+const iconStyleObject = computed(() => {
+  const iconSize = props.size * 0.8;
+  const iconIndent = (props.size - iconSize) / 2;
 
-  inject: ['floatTextProvider'],
+  return {
+    top: `${iconIndent}px`,
+    left: `${iconIndent}px`,
+    width: `${iconSize}px`,
+    height: `${iconSize}px`,
+  };
+});
 
-  props: {
-    size: {
-      type: Number,
-      default: 360,
+function renderSubstrate() {
+  substrates.value.push({
+    id: Math.random(),
+  });
+}
+
+function renderIncomeFloatText(event) {
+  const value = `${formatMoney(getIncomePerClick.value)}`;
+  const fontSize = 16;
+  const symbolWidthCoefficient = 0.28;
+  const symbolWidthPx = fontSize * symbolWidthCoefficient;
+  const itemValueLength = value.length;
+  const customXOffset = symbolWidthPx * itemValueLength;
+
+  addFloatTextItem({
+    value,
+    coords: {
+      x: event.pageX - customXOffset,
+      y: event.pageY - fontSize,
     },
-  },
+    fontSize,
+  });
+}
 
-  data() {
-    return {
-      substrates: [],
-    };
-  },
-
-  computed: {
-    scytheStyleObject() {
-      return {
-        width: `${this.size}px`,
-        height: `${this.size}px`,
-      };
-    },
-
-    iconStyleObject() {
-      const iconSize = this.size * 0.8;
-      const iconIndent = (this.size - iconSize) / 2;
-
-      return {
-        top: `${iconIndent}px`,
-        left: `${iconIndent}px`,
-        width: `${iconSize}px`,
-        height: `${iconSize}px`,
-      };
-    },
-  },
-
-  methods: {
-    onMousedown(event) {
-      harvest();
-      this.renderSubstrate();
-      this.renderIncomeFloatText(event);
-    },
-
-    renderSubstrate() {
-      this.substrates.push({
-        id: Math.random(),
-      });
-    },
-
-    renderIncomeFloatText(event) {
-      const value = `${this.$formatMoney(getIncomePerClick.value)}`;
-      const fontSize = 16;
-      const symbolWidthCoefficient = 0.28;
-      const symbolWidthPx = fontSize * symbolWidthCoefficient;
-      const itemValueLength = value.length;
-      const customXOffset = symbolWidthPx * itemValueLength;
-
-      this.floatTextProvider.renderFloatTextItem({
-        value,
-        coords: {
-          x: event.clientX - customXOffset,
-          y: event.clientY - fontSize,
-        },
-        fontSize,
-      });
-    },
-  },
-};
+function onMouseDown(event) {
+  harvest();
+  renderSubstrate();
+  renderIncomeFloatText(event);
+}
 </script>
 
 <style lang="scss" scoped>

@@ -10,7 +10,7 @@
       <FScythe class="scythe" />
       <p>Money: {{ $formatMoney(getMoney) }}</p>
       <p>Income per click: {{ $formatMoney(getIncomePerClick) }}</p>
-      <p ref="autoIncome">
+      <p ref="autoIncomeRef">
         Auto income: {{ $formatMoney(getAutoIncome) }}
       </p>
     </div>
@@ -21,10 +21,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
-import FScythe from '@/components/FScythe.vue';
-import AnimalsShop from '@/components/shops/AnimalsShop.vue';
-import CropsShop from '@/components/shops/CropsShop.vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import {
   getMoney,
   getTotalMoney,
@@ -32,23 +29,29 @@ import {
   getAutoIncome,
   getEventBus,
 } from '@/store';
+import useFloatText from '@/components/floatText/useFloatText';
+import FScythe from '@/components/FScythe.vue';
+import AnimalsShop from '@/components/shops/AnimalsShop.vue';
+import CropsShop from '@/components/shops/CropsShop.vue';
+import formatMoney from '@/utils/formatMoney';
+import getAbsoluteCoords from '@/utils/getAbsoluteCoords';
 
+const { addFloatTextItem } = useFloatText();
 const eventBus = getEventBus.value;
+const autoIncomeRef = ref(null);
 
 function renderAutoIncomeFloatText(value) {
-  // const autoIncomeRect = this.$refs.autoIncome.getBoundingClientRect();
-  // const customYOffset = 6;
+  const autoIncomeRect = autoIncomeRef.value.getBoundingClientRect();
+  const customYOffset = 6;
 
-  console.log('render float text: ', value);
-
-  // this.floatTextProvider.renderFloatTextItem({
-  //   value: `+${this.$formatMoney(value)}`,
-  //   coords: {
-  //     x: autoIncomeRect.right + customYOffset,
-  //     y: autoIncomeRect.top,
-  //   },
-  //   fontSize: 16,
-  // });
+  addFloatTextItem({
+    value: `+${formatMoney(value)}`,
+    coords: getAbsoluteCoords(
+      autoIncomeRect.right + customYOffset,
+      autoIncomeRect.top,
+    ),
+    fontSize: 16,
+  });
 }
 
 function onAddedAutoIncome(event) {
@@ -66,7 +69,6 @@ onMounted(() => {
 onUnmounted(() => {
   eventBus.off('added-auto-income', onAddedAutoIncome);
 });
-
 </script>
 
 <style lang="scss" scoped>

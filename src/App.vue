@@ -2,9 +2,8 @@
   <div>
     <FHeader />
     <div class="container">
-      <FloatTextZone>
-        <GameField />
-      </FloatTextZone>
+      <FloatTextOverlay />
+      <GameField />
       <DevPanel
         v-if="isDevPanel"
         @close="isDevPanel = false"
@@ -18,7 +17,7 @@
 
 <script>
 import FHeader from '@/components/FHeader.vue';
-import FloatTextZone from '@/components/FloatTextZone.vue';
+import FloatTextOverlay from '@/components/floatText/FloatTextOverlay.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
@@ -28,7 +27,7 @@ export default {
 
   components: {
     FHeader,
-    FloatTextZone,
+    FloatTextOverlay,
     GameField,
     DevPanel,
     SavingStatusController,

@@ -23,7 +23,7 @@
         </div>
       </div>
       <div
-        ref="itemsCount"
+        ref="itemsCountRef"
         class="shop-item__count"
       >
         {{ amount }}
@@ -32,87 +32,75 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from 'vue';
 import { getMoney } from '@/store';
+import useFloatText from '@/components/floatText/useFloatText';
 
-export default {
-  inject: ['floatTextProvider'],
-
-  props: {
-    id: {
-      type: Number,
-      default: NaN,
-      required: true,
-    },
-
-    name: {
-      type: String,
-      default: '',
-    },
-
-    iconName: {
-      type: String,
-      default: '',
-    },
-
-    price: {
-      type: Number,
-      default: 0,
-    },
-
-    incomeText: {
-      type: String,
-      default: '',
-    },
-
-    amount: {
-      type: Number,
-      default: 0,
-    },
+const props = defineProps({
+  id: {
+    type: Number,
+    default: NaN,
+    required: true,
   },
 
-  data() {
-    return {
-      floatTextItems: [],
-      numberOfPurchases: 1,
-    };
+  name: {
+    type: String,
+    default: '',
   },
 
-  computed: {
-    isDisabled() {
-      return this.price > getMoney.value;
-    },
+  iconName: {
+    type: String,
+    default: '',
   },
 
-  methods: {
-    onClick() {
-      if (this.isDisabled) {
-        return;
-      }
-
-      this.$emit('shop-item-click', {
-        id: this.id,
-        amount: this.numberOfPurchases,
-      });
-
-      this.renderAmountFloatText();
-    },
-
-    renderAmountFloatText() {
-      const itemsCountRect = this.$refs.itemsCount.getBoundingClientRect();
-      const customYOffset = 6;
-
-      this.floatTextProvider.renderFloatTextItem({
-        value: `+${this.numberOfPurchases}`,
-        coords: {
-          x: itemsCountRect.right + customYOffset,
-          y: itemsCountRect.top,
-        },
-        fontSize: 24,
-      });
-    },
+  price: {
+    type: Number,
+    default: 0,
   },
-};
+
+  incomeText: {
+    type: String,
+    default: '',
+  },
+
+  amount: {
+    type: Number,
+    default: 0,
+  },
+});
+const emits = defineEmits(['shop-item-click']);
+const isDisabled = computed(() => props.price > getMoney.value);
+const { addFloatTextItem } = useFloatText();
+const itemsCountRef = ref(null);
+const NUMBER_OF_PURCHASES = 1;
+
+function renderAmountFloatText() {
+  const itemsCountRect = itemsCountRef.value.getBoundingClientRect();
+  const customYOffset = 6;
+
+  addFloatTextItem({
+    value: `+${NUMBER_OF_PURCHASES}`,
+    coords: {
+      x: itemsCountRect.right + customYOffset,
+      y: itemsCountRect.top,
+    },
+    fontSize: 24,
+  });
+}
+
+function onClick() {
+  if (isDisabled.value) {
+    return;
+  }
+
+  emits('shop-item-click', {
+    id: props.id,
+    amount: NUMBER_OF_PURCHASES,
+  });
+
+  renderAmountFloatText();
+}
 </script>
 
 <style lang="scss" scoped>
