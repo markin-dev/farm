@@ -7,10 +7,9 @@
 
 <script>
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
+import useStore from '@/store/useStore';
 
-import { getEventBus } from '@/store';
-
-const eventBus = getEventBus.value;
+const { eventBus } = useStore();
 
 export default {
   name: 'App',
@@ -26,11 +25,11 @@ export default {
   },
 
   mounted() {
-    eventBus.on('game-saved', this.onGameSaved);
+    eventBus.value.on('game-saved', this.onGameSaved);
   },
 
   unmounted() {
-    eventBus.off('game-saved', this.onGameSaved);
+    eventBus.value.off('game-saved', this.onGameSaved);
   },
 
   methods: {

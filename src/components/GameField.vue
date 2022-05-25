@@ -6,12 +6,12 @@
     <div
       class="game-field__main-field"
     >
-      <h3>Total farm cost: {{ $formatMoney(getTotalMoney) }}</h3>
+      <h3>Total farm cost: {{ $formatMoney(totalMoney) }}</h3>
       <FScythe class="scythe" />
-      <p>Money: {{ $formatMoney(getMoney) }}</p>
-      <p>Income per click: {{ $formatMoney(getIncomePerClick) }}</p>
+      <p>Money: {{ $formatMoney(money) }}</p>
+      <p>Income per click: {{ $formatMoney(incomePerClick) }}</p>
       <p ref="autoIncomeRef">
-        Auto income: {{ $formatMoney(getAutoIncome) }}
+        Auto income: {{ $formatMoney(autoIncome) }}
       </p>
     </div>
     <div class="game-field__right-menu">
@@ -22,13 +22,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import {
-  getMoney,
-  getTotalMoney,
-  getIncomePerClick,
-  getAutoIncome,
-  getEventBus,
-} from '@/store';
+import useStore from '@/store/useStore';
 import useFloatText from '@/components/floatText/useFloatText';
 import FScythe from '@/components/FScythe.vue';
 import AnimalsShop from '@/components/shops/AnimalsShop.vue';
@@ -36,8 +30,14 @@ import CropsShop from '@/components/shops/CropsShop.vue';
 import formatMoney from '@/utils/formatMoney';
 import getAbsoluteCoords from '@/utils/getAbsoluteCoords';
 
+const {
+  money,
+  totalMoney,
+  incomePerClick,
+  autoIncome,
+  eventBus,
+} = useStore();
 const { addFloatTextItem } = useFloatText();
-const eventBus = getEventBus.value;
 const autoIncomeRef = ref(null);
 
 function renderAutoIncomeFloatText(value) {
@@ -63,11 +63,11 @@ function onAddedAutoIncome(event) {
 }
 
 onMounted(() => {
-  eventBus.on('added-auto-income', onAddedAutoIncome);
+  eventBus.value.on('added-auto-income', onAddedAutoIncome);
 });
 
 onUnmounted(() => {
-  eventBus.off('added-auto-income', onAddedAutoIncome);
+  eventBus.value.off('added-auto-income', onAddedAutoIncome);
 });
 </script>
 

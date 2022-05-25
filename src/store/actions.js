@@ -1,5 +1,11 @@
-import {
-  getStore,
+import useStore from '@/store/useStore';
+
+const {
+  incomePerClick,
+  animals,
+  crops,
+  autoIncome,
+  eventBus,
   addMoney,
   subtractMoney,
   addAnimals,
@@ -8,21 +14,19 @@ import {
   addCrops,
   addIncomePerClick,
   increaseCropPrice,
-} from '@/store';
-
-const store = getStore.value;
+} = useStore();
 
 function harvest() {
-  addMoney(store.incomePerClick);
+  addMoney(incomePerClick.value);
 }
 
 function addAutoIncomeMoney(multiplier) {
-  addMoney(store.autoIncome * multiplier);
-  store.eventBus.emit('added-auto-income', store.autoIncome * multiplier);
+  addMoney(autoIncome.value * multiplier);
+  eventBus.value.emit('added-auto-income', autoIncome.value * multiplier);
 }
 
 function buyAnimal(payload) {
-  const animalItem = store.animals.find((item) => item.id === payload.id);
+  const animalItem = animals.value.find((item) => item.id === payload.id);
   subtractMoney(animalItem.price);
   addAnimals(payload);
   addAutoIncome(animalItem.income * payload.amount);
@@ -30,7 +34,7 @@ function buyAnimal(payload) {
 }
 
 function buyCrop(payload) {
-  const cropItem = store.crops.find((item) => item.id === payload.id);
+  const cropItem = crops.value.find((item) => item.id === payload.id);
   subtractMoney(cropItem.price);
   addCrops(payload);
   addIncomePerClick(cropItem.income * payload.amount);

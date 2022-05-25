@@ -17,7 +17,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getStore } from '@/store';
+import useStore from '@/store/useStore';
 import FHeader from '@/components/FHeader.vue';
 import FloatTextOverlay from '@/components/floatText/FloatTextOverlay.vue';
 import GameField from '@/components/GameField.vue';
@@ -25,7 +25,7 @@ import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
 
 const isDevPanelShowed = ref(false);
-const store = getStore.value;
+const { store } = useStore();
 
 function handleKeydown(event) {
   if (event.code === 'KeyD' && event.shiftKey) {

@@ -2,7 +2,7 @@
   <div class="crops-shop">
     <h3>Crops Shop</h3>
     <ShopItemsList
-      :items="$options.getCrops.value"
+      :items="$options.crops.value"
       income-text="per click"
       @shop-item-click="buyCrop"
     />
@@ -11,11 +11,13 @@
 
 <script>
 import ShopItemsList from '@/components/shops/ShopItemsList.vue';
-import { getCrops } from '@/store';
+import useStore from '@/store/useStore';
 import { buyCrop } from '@/store/actions';
 
+const { crops } = useStore();
+
 export default {
-  getCrops,
+  crops,
 
   components: {
     ShopItemsList,

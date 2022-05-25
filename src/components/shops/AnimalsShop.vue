@@ -2,7 +2,7 @@
   <div class="animals-shop">
     <h3>Animals Shop</h3>
     <ShopItemsList
-      :items="$options.getAnimals.value"
+      :items="$options.animals.value"
       income-text="auto income"
       @shop-item-click="buyAnimal"
     />
@@ -11,11 +11,13 @@
 
 <script>
 import ShopItemsList from '@/components/shops/ShopItemsList.vue';
-import { getAnimals } from '@/store';
+import useStore from '@/store/useStore';
 import { buyAnimal } from '@/store/actions';
 
+const { animals } = useStore();
+
 export default {
-  getAnimals,
+  animals,
 
   components: {
     ShopItemsList,

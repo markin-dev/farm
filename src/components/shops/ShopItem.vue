@@ -34,8 +34,10 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { getMoney } from '@/store';
+import useStore from '@/store/useStore';
 import useFloatText from '@/components/floatText/useFloatText';
+
+const { money } = useStore();
 
 const props = defineProps({
   id: {
@@ -70,7 +72,7 @@ const props = defineProps({
   },
 });
 const emits = defineEmits(['shop-item-click']);
-const isDisabled = computed(() => props.price > getMoney.value);
+const isDisabled = computed(() => props.price > money.value);
 const { addFloatTextItem } = useFloatText();
 const itemsCountRef = ref(null);
 const NUMBER_OF_PURCHASES = 1;

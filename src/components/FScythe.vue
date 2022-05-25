@@ -20,11 +20,12 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { harvest } from '@/store/actions';
-import { getIncomePerClick } from '@/store';
+import useStore from '@/store/useStore';
 import useFloatText from '@/components/floatText/useFloatText';
 import ScytheSubstrate from '@/components/ScytheSubstrate.vue';
 import formatMoney from '@/utils/formatMoney';
 
+const { incomePerClick } = useStore();
 const substrates = ref([]);
 const props = defineProps({
   size: {
@@ -56,7 +57,7 @@ function renderSubstrate() {
 }
 
 function renderIncomeFloatText(event) {
-  const value = `${formatMoney(getIncomePerClick.value)}`;
+  const value = `${formatMoney(incomePerClick.value)}`;
   const fontSize = 16;
   const symbolWidthCoefficient = 0.28;
   const symbolWidthPx = fontSize * symbolWidthCoefficient;
