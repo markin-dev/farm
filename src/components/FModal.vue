@@ -1,20 +1,20 @@
 <template>
   <div
     v-if="isOpen"
-    class="f-popup"
+    class="f-modal"
   >
     <div
-      class="f-popup__overlay"
+      class="f-modal__overlay"
       @click.self="close"
     >
-      <div class="f-popup__body">
-        <div class="f-popup__header">
-          <h2 class="f-popup__title">
+      <div class="f-modal__body">
+        <div class="f-modal__header">
+          <h2 class="f-modal__title">
             {{ title }}
           </h2>
           <IconButton @click="close" />
         </div>
-        <div class="f-popup__content">
+        <div class="f-modal__content">
           <slot />
         </div>
       </div>
@@ -22,36 +22,30 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import IconButton from '@/components/IconButton.vue';
 
-export default {
-  components: {
-    IconButton,
+defineProps({
+  isOpen: {
+    type: Boolean,
+    default: false,
   },
 
-  props: {
-    isOpen: {
-      type: Boolean,
-      default: false,
-    },
-
-    title: {
-      type: String,
-      default: '',
-    },
+  title: {
+    type: String,
+    default: '',
   },
+});
 
-  methods: {
-    close() {
-      this.$emit('close');
-    },
-  },
-};
+const emits = defineEmits(['close']);
+
+function close() {
+  emits('close');
+}
 </script>
 
 <style lang="scss" scoped>
-.f-popup {
+.f-modal {
   &__overlay {
     display: flex;
     justify-content: center;

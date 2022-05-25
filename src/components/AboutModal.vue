@@ -1,9 +1,9 @@
 <template>
-  <FPopup
+  <FModal
     class="about-modal"
     :is-open="isOpen"
     title="Farm"
-    @close="$emit('close')"
+    @close="emits('close')"
   >
     <p>Simple farming clicker based on Vue</p>
     <a
@@ -15,7 +15,7 @@
     <div class="about-modal__attribution">
       <p>Attribution:</p>
       <a
-        v-for="linkData in $options.ATTRIBUTION_LINKS_DATA"
+        v-for="linkData in ATTRIBUTION_LINKS_DATA"
         :key="linkData.text"
         target="_blank"
         :title="linkData.title"
@@ -24,11 +24,20 @@
         {{ linkData.text }}
       </a>
     </div>
-  </FPopup>
+  </FModal>
 </template>
 
-<script>
-import FPopup from '@/components/FPopup.vue';
+<script setup>
+import FModal from '@/components/FModal.vue';
+
+defineProps({
+  isOpen: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emits = defineEmits(['close']);
 
 const ATTRIBUTION_LINKS_DATA = [
   {
@@ -87,21 +96,6 @@ const ATTRIBUTION_LINKS_DATA = [
     href: 'https://www.flaticon.com/free-icons/fruit',
   },
 ];
-
-export default {
-  ATTRIBUTION_LINKS_DATA,
-
-  components: {
-    FPopup,
-  },
-
-  props: {
-    isOpen: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
 </script>
 
 <style lang="scss" scoped>
