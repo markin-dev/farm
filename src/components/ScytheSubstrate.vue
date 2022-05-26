@@ -20,11 +20,11 @@ defineProps({
   },
 });
 
-const emits = defineEmits(['expired']);
+const emits = defineEmits(['animation-end']);
 
 onMounted(() => {
   setTimeout(() => {
-    emits('expired');
+    emits('animation-end');
   }, 1000);
 });
 </script>
