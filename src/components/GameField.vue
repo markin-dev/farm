@@ -32,8 +32,8 @@
 import { onMounted, onUnmounted, ref } from 'vue';
 import { buyAnimal, buyCrop } from '@/store/actions';
 import useStore from '@/store/useStore';
-import useFloatText from '@/components/floatText/useFloatText';
-import FScythe from '@/components/FScythe.vue';
+import useFloatText, { floatTextTypes } from '@/components/floatText/useFloatText';
+import FScythe from '@/components/harvest/FScythe.vue';
 import FShop from '@/components/shops/FShop.vue';
 import formatMoney from '@/utils/formatMoney';
 import getAbsoluteCoords from '@/utils/getAbsoluteCoords';
@@ -60,7 +60,7 @@ function renderAutoIncomeFloatText(value) {
       autoIncomeRect.right + customYOffset,
       autoIncomeRect.top,
     ),
-    fontSize: 16,
+    type: floatTextTypes.AUTO_INCOME,
   });
 }
 

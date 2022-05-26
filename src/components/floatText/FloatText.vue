@@ -3,19 +3,14 @@
     appear
     name="float-text"
   >
-    <div
-      class="float-text"
-      :style="{transition: `all ${duration}s`}"
+    <span
+      :class="[
+        'float-text',
+        `float-text_${type}`,
+      ]"
     >
-      <span
-        class="float-text__value"
-        :style="{
-          fontSize: `${fontSizePx}px`,
-        }"
-      >
-        {{ text }}
-      </span>
-    </div>
+      {{ text }}
+    </span>
   </transition>
 </template>
 
@@ -33,14 +28,9 @@ const props = defineProps({
     default: '',
   },
 
-  duration: {
-    type: Number,
-    default: 0.6,
-  },
-
-  fontSizePx: {
-    type: Number,
-    default: 16,
+  type: {
+    type: String,
+    default: 'common',
   },
 });
 const emits = defineEmits(['animation-end']);
@@ -48,7 +38,7 @@ const emits = defineEmits(['animation-end']);
 onMounted(() => {
   setTimeout(() => {
     emits('animation-end', props.id);
-  }, props.duration * 1000);
+  }, 600);
 });
 
 </script>
@@ -57,11 +47,40 @@ onMounted(() => {
 .float-text {
   pointer-events: none;
   user-select: none;
+  transition: all .6s;
+  box-sizing: border-box;
 
-  &__value {
-    position: absolute;
-    display: inline-block;
-    white-space: nowrap;
+  &_common {
+    font-size: 16px;
+  }
+
+  &_uncommon {
+    font-size: 18px;
+    color: $green-500;
+  }
+
+  &_rare {
+    font-size: 20px;
+    color: $blue-500;
+  }
+
+  &_epic {
+    font-size: 22px;
+    color: $purple-500;
+  }
+
+  &_legendary {
+    font-size: 24px;
+    color: $yellow-600;
+  }
+
+  &_auto-income {
+    font-size: 16px;
+    color: $green-500;
+  }
+
+  &_shop-purchase {
+    font-size: 24px;
     color: $green-500;
   }
 

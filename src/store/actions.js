@@ -16,8 +16,8 @@ const {
   increaseCropPrice,
 } = useStore();
 
-function harvest() {
-  addMoney(incomePerClick.value);
+function harvestAction(multiplier) {
+  addMoney(incomePerClick.value * multiplier);
 }
 
 function addAutoIncomeMoney(multiplier) {
@@ -42,7 +42,7 @@ function buyCrop(payload) {
 }
 
 export {
-  harvest,
+  harvestAction,
   addAutoIncomeMoney,
   buyAnimal,
   buyCrop,

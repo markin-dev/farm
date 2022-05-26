@@ -35,7 +35,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import useStore from '@/store/useStore';
-import useFloatText from '@/components/floatText/useFloatText';
+import useFloatText, { floatTextTypes } from '@/components/floatText/useFloatText';
 import getAbsoluteCoords from '@/utils/getAbsoluteCoords';
 
 const { money } = useStore();
@@ -87,7 +87,7 @@ function renderAmountFloatText() {
       itemsCountRect.right + customYOffset,
       itemsCountRect.top,
     ),
-    fontSize: 24,
+    type: floatTextTypes.SHOP_PURCHASE,
   });
 }
 

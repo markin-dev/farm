@@ -1,18 +1,14 @@
 <template>
-  <div
-    ref="floatTextOverlay"
-    class="float-text-overlay"
-  >
+  <div class="float-text-overlay">
     <div class="float-text-overlay__container">
       <FloatText
         v-for="item in floatTextItems"
         :id="item.id"
         :key="item.id"
-        :ref="`floatText${item.id}`"
         class="float-text-overlay__float-text"
         :style="getFloatTextStyle(item)"
         :text="item.value"
-        :font-size-px="item.fontSize"
+        :type="item.type"
         @animation-end="removeFloatTextItem"
       />
     </div>

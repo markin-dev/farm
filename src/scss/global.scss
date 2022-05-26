@@ -1,6 +1,5 @@
 @import './colors.scss';
 
-$test: #000;
 $lg: 1024px;
 
 @mixin lg {
@@ -19,7 +18,8 @@ body * {
   font-family: sans-serif;
   color: $gray-800;
 
-  pre, p {
+  pre,
+  p {
     margin: 0;
   }
 

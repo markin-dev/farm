@@ -3,12 +3,12 @@ import { ref, computed } from 'vue';
 const floatTextItems = ref([]);
 
 function useFloatText() {
-  function addFloatTextItem(event) {
+  function addFloatTextItem(item) {
     floatTextItems.value.push({
       id: Math.random(),
-      value: event.value || 'default text',
-      coords: event.coords,
-      fontSize: event.fontSize || 16,
+      value: item.value || 'default text',
+      coords: item.coords,
+      type: item.type,
     });
   }
 
@@ -23,5 +23,15 @@ function useFloatText() {
     removeFloatTextItem,
   };
 }
+
+export const floatTextTypes = {
+  COMMON: 'common',
+  UNCOMMON: 'uncommon',
+  RARE: 'rare',
+  EPIC: 'epic',
+  LEGENDARY: 'legendary',
+  AUTO_INCOME: 'auto-income',
+  SHOP_PURCHASE: 'shop-purchase',
+};
 
 export default useFloatText;
