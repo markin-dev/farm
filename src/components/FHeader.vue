@@ -25,14 +25,14 @@
 <script setup>
 import FLink from '@/components/FLink.vue';
 import AboutModal from '@/components/modals/AboutModal.vue';
-import useModal from '@/components/modals/useModal';
+import useShowHide from '@/hooks/useShowHide';
 import { save } from '@/store/saveLoad';
 
 const {
-  isOpen,
-  openModal,
-  closeModal,
-} = useModal();
+  isShowed: isOpen,
+  show: openModal,
+  hide: closeModal,
+} = useShowHide();
 </script>
 
 <style lang="scss" scoped>
