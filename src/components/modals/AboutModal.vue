@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import FModal from '@/components/FModal.vue';
+import FModal from '@/components/modals/FModal.vue';
 
 defineProps({
   isOpen: {
@@ -38,7 +38,6 @@ defineProps({
 });
 
 const emits = defineEmits(['close']);
-
 const ATTRIBUTION_LINKS_DATA = [
   {
     text: 'Harvest icons created by Eucalyp - Flaticon',
