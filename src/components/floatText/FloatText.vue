@@ -56,6 +56,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .float-text {
   pointer-events: none;
+  user-select: none;
 
   &__value {
     position: absolute;
