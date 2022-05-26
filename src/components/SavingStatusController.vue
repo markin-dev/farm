@@ -1,53 +1,32 @@
 <template>
   <SavingStatusIcon
-    v-if="isShow"
-    @animation-end="hideStatusIcon"
+    v-if="isIconShowed"
+    @animation-end="hideIcon"
   />
 </template>
 
-<script>
+<script setup>
+import { onMounted, onUnmounted, nextTick } from 'vue';
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
 import useStore from '@/store/useStore';
+import useShowHide from '@/hooks/useShowHide';
 
 const { eventBus } = useStore();
+const { isShowed: isIconShowed, show: showIcon, hide: hideIcon } = useShowHide();
 
-export default {
-  name: 'App',
+async function onGameSaved() {
+  hideIcon();
+  await nextTick();
+  showIcon();
+}
 
-  components: {
-    SavingStatusIcon,
-  },
+onMounted(() => {
+  eventBus.value.on('game-saved', onGameSaved);
+});
 
-  data() {
-    return {
-      isShow: false,
-    };
-  },
-
-  mounted() {
-    eventBus.value.on('game-saved', this.onGameSaved);
-  },
-
-  unmounted() {
-    eventBus.value.off('game-saved', this.onGameSaved);
-  },
-
-  methods: {
-    showStatusIcon() {
-      this.isShow = true;
-    },
-
-    hideStatusIcon() {
-      this.isShow = false;
-    },
-
-    async onGameSaved() {
-      this.hideStatusIcon();
-      await this.$nextTick();
-      this.showStatusIcon();
-    },
-  },
-};
+onUnmounted(() => {
+  eventBus.value.off('game-saved', onGameSaved);
+});
 </script>
 
 <style lang="scss" scoped>
