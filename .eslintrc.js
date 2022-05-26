@@ -7,6 +7,6 @@ module.exports = {
     'linebreak-style': 0,
   },
   parserOptions: {
-    ecmaVersion: 2020.0,
+    ecmaVersion: 2020,
   },
 };
