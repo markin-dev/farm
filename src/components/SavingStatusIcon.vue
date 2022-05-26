@@ -5,36 +5,32 @@
   >
     <div
       class="saving-status-icon"
-      :style="{transition: `all ${$options.animationDurationSec}s`}"
+      :style="{transition: `all ${animationDurationSec}s`}"
     />
   </transition>
 </template>
 
-<script>
-export default {
-  props: {
-    animationDurationSec: {
-      type: Number,
-      default: 1,
-    },
-  },
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 
-  data() {
-    return {
-      timeout: 0,
-    };
+const timeout = ref(0);
+const props = defineProps({
+  animationDurationSec: {
+    type: Number,
+    default: 1,
   },
+});
+const emits = defineEmits(['animation-end']);
 
-  mounted() {
-    this.timeout = setTimeout(() => {
-      this.$emit('animation-end');
-    }, this.animationDurationSec * 1000);
-  },
+onMounted(() => {
+  timeout.value = setTimeout(() => {
+    emits('animation-end');
+  }, props.animationDurationSec * 1000);
+});
 
-  unmounted() {
-    clearTimeout(this.timeout);
-  },
-};
+onUnmounted(() => {
+  clearTimeout(timeout);
+});
 </script>
 
 <style lang="scss" scoped>
