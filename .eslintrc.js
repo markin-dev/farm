@@ -4,9 +4,9 @@ module.exports = {
     '@vue/airbnb',
   ],
   rules: {
-    "linebreak-style": 0,
+    'linebreak-style': 0,
   },
   parserOptions: {
-    ecmaVersion: 2020.
-  }
+    ecmaVersion: 2020.0,
+  },
 };

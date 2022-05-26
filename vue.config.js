@@ -5,8 +5,10 @@ module.exports = {
     ? '/farm/'
     : '/',
   devServer: {
-    overlay: {
-      errors: false,
+    client: {
+      overlay: {
+        errors: false,
+      },
     },
   },
   configureWebpack: {
