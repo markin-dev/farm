@@ -10,21 +10,23 @@
   </transition>
 </template>
 
-<script>
-export default {
-  props: {
-    styleObject: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+<script setup>
+import { onMounted } from 'vue';
 
-  mounted() {
-    setTimeout(() => {
-      this.$emit('expired');
-    }, 1000);
+defineProps({
+  styleObject: {
+    type: Object,
+    default: () => ({}),
   },
-};
+});
+
+const emits = defineEmits(['expired']);
+
+onMounted(() => {
+  setTimeout(() => {
+    emits('expired');
+  }, 1000);
+});
 </script>
 
 <style lang="scss" scoped>
