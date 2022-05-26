@@ -12,7 +12,7 @@
       v-for="item in substrates"
       :key="item.id"
       :style-object="iconStyleObject"
-      @expired="substrates.shift()"
+      @animation-end="substrates.shift()"
     />
   </div>
 </template>
