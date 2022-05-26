@@ -6,53 +6,33 @@
         <FLink
           class="actions__item"
           text="Save"
-          @click="manualSave"
+          @click="save"
         />
         <FLink
           class="actions__item"
           text="About"
-          @click="openAboutPopup"
+          @click="openModal"
         />
       </div>
     </div>
     <AboutModal
-      :is-open="isAboutPopupOpen"
-      @close="closeAboutPopup"
+      :is-open="isOpen"
+      @close="closeModal"
     />
   </div>
 </template>
 
-<script>
+<script setup>
 import FLink from '@/components/FLink.vue';
-import AboutModal from '@/components/AboutModal.vue';
+import AboutModal from '@/components/modals/AboutModal.vue';
+import useModal from '@/components/modals/useModal';
 import { save } from '@/store/saveLoad';
 
-export default {
-  components: {
-    FLink,
-    AboutModal,
-  },
-
-  data() {
-    return {
-      isAboutPopupOpen: false,
-    };
-  },
-
-  methods: {
-    manualSave() {
-      save(this.$store);
-    },
-
-    openAboutPopup() {
-      this.isAboutPopupOpen = true;
-    },
-
-    closeAboutPopup() {
-      this.isAboutPopupOpen = false;
-    },
-  },
-};
+const {
+  isOpen,
+  openModal,
+  closeModal,
+} = useModal();
 </script>
 
 <style lang="scss" scoped>
