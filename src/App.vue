@@ -1,6 +1,7 @@
 <template>
   <div>
     <FHeader />
+
     <div class="container">
       <FloatTextOverlay />
       <GameField />
@@ -8,12 +9,11 @@
         v-if="isDevPanelShowed"
         @close="isDevPanelShowed = false"
       >
-        <button
+        <HoldButton
           class="clear-save-button"
-          @click="clearSave"
-        >
-          Clear save
-        </button>
+          text="Clear save"
+          @invoked="clearSave"
+        />
         <pre>{{ store }}</pre>
       </DevPanel>
       <SavingStatusController />
@@ -30,6 +30,7 @@ import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
 import { clearSave } from '@/store/saveLoad';
+import HoldButton from '@/components/HoldButton.vue';
 
 const isDevPanelShowed = ref(false);
 const store = useStore();
