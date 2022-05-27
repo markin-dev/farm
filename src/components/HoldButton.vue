@@ -54,5 +54,9 @@ function stopProgress() {
   font-size: 16px;
   border: 1px solid $gray-300;
   cursor: pointer;
+
+  &:hover {
+    border-color: $gray-400;
+  }
 }
 </style>
