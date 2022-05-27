@@ -8,6 +8,12 @@
         v-if="isDevPanelShowed"
         @close="isDevPanelShowed = false"
       >
+        <button
+          class="clear-save-button"
+          @click="clearSave"
+        >
+          Clear save
+        </button>
         <pre>{{ store }}</pre>
       </DevPanel>
       <SavingStatusController />
@@ -23,6 +29,7 @@ import FloatTextOverlay from '@/components/floatText/FloatTextOverlay.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
+import { clearSave } from '@/store/saveLoad';
 
 const isDevPanelShowed = ref(false);
 const store = useStore();
@@ -47,5 +54,9 @@ onMounted(() => {
   @include lg {
     max-width: 1200px;
   }
+}
+
+.clear-save-button {
+  margin-bottom: 12px;
 }
 </style>

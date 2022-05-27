@@ -40,3 +40,8 @@ export const startAutosave = () => {
     save();
   }, AUTOSAVE_DELAY_MS);
 };
+
+export const clearSave = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  window.location.reload();
+};
