@@ -30,10 +30,6 @@ const { substrates, shiftSubstrate } = useSubstrate();
   touch-action: manipulation;
 
   &__button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     width: 288px;
     height: 288px;
