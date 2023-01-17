@@ -1,7 +1,6 @@
 import useStore from '@/store/useStore';
 
 const {
-  incomePerClick,
   animals,
   crops,
   autoIncome,
@@ -16,8 +15,8 @@ const {
   increaseCropPrice,
 } = useStore();
 
-function harvestAction(multiplier) {
-  addMoney(incomePerClick.value * multiplier);
+function harvestAction(addedMoney) {
+  addMoney(addedMoney);
 }
 
 function addAutoIncomeMoney(multiplier) {
