@@ -25,7 +25,7 @@
 <script setup>
 import FLink from '@/components/FLink.vue';
 import AboutModal from '@/components/modals/AboutModal.vue';
-import useShowHide from '@/hooks/useShowHide';
+import useShowHide from '@/composables/useShowHide';
 import { save } from '@/store/saveLoad';
 
 const {

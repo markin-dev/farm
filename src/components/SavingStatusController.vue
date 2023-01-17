@@ -9,7 +9,7 @@
 import { onMounted, onUnmounted, nextTick } from 'vue';
 import SavingStatusIcon from '@/components/SavingStatusIcon.vue';
 import useStore from '@/store/useStore';
-import useShowHide from '@/hooks/useShowHide';
+import useShowHide from '@/composables/useShowHide';
 
 const { eventBus } = useStore();
 const { isShowed: isIconShowed, show: showIcon, hide: hideIcon } = useShowHide();
