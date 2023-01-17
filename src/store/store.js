@@ -2,8 +2,8 @@ import { ref } from 'vue';
 import mitt from 'mitt';
 
 const store = ref({
-  money: 10000,
-  totalMoney: 10000,
+  money: 0,
+  totalMoney: 0,
   incomePerClick: 1,
   autoIncome: 0,
   eventBus: mitt(),
@@ -55,7 +55,7 @@ const store = ref({
       name: 'Chicken',
       iconName: 'chicken',
       price: 1000,
-      income: 1,
+      income: 100,
       amount: 0,
     },
     {
@@ -63,7 +63,7 @@ const store = ref({
       name: 'Rabbit',
       iconName: 'rabbit',
       price: 9000,
-      income: 3,
+      income: 300,
       amount: 0,
     },
     {
@@ -71,7 +71,7 @@ const store = ref({
       name: 'Pig',
       iconName: 'pig',
       price: 125000,
-      income: 5,
+      income: 500,
       amount: 0,
     },
     {
@@ -79,7 +79,7 @@ const store = ref({
       name: 'Goat',
       iconName: 'goat',
       price: 620000,
-      income: 7,
+      income: 700,
       amount: 0,
     },
     {
@@ -87,7 +87,7 @@ const store = ref({
       name: 'Cow',
       iconName: 'cow',
       price: 5000000,
-      income: 10,
+      income: 1000,
       amount: 0,
     },
   ],
