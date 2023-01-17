@@ -2,7 +2,7 @@
   <div
     :class="[
       'shop-item',
-      {'shop-item_disabled': isDisabled},
+      { 'shop-item_disabled': isDisabled },
     ]"
     @click="onClick"
   >

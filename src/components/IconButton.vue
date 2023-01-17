@@ -1,5 +1,8 @@
 <template>
-  <button class="icon-button" />
+  <button
+    class="icon-button"
+    type="button"
+  />
 </template>
 
 <style lang="scss" scoped>

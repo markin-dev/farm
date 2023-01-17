@@ -17,7 +17,7 @@
       <div
         :class="[
           'dev-panel-header__button dev-panel-header__button-minimize',
-          {'dev-panel-header__button-minimize_minimized' : isMinimized}
+          { 'dev-panel-header__button-minimize_minimized': isMinimized },
         ]"
         @click="$emit('minimize-button-click')"
       />

@@ -1,6 +1,7 @@
 <template>
   <button
     class="hold-button"
+    type="button"
     :style="style"
     @mousedown="startProgress"
     @mouseup="stopProgress"

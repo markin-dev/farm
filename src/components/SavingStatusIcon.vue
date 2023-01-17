@@ -5,7 +5,7 @@
   >
     <div
       class="saving-status-icon"
-      :style="{transition: `all ${animationDurationSec}s`}"
+      :style="{ transition: `all ${animationDurationSec}s` }"
     />
   </transition>
 </template>

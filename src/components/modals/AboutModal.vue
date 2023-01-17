@@ -9,6 +9,7 @@
     <a
       href="https://github.com/markin-dev/farm"
       target="_blank"
+      rel="noopener noreferrer"
     >
       GitHub
     </a>
@@ -18,6 +19,7 @@
         v-for="linkData in ATTRIBUTION_LINKS_DATA"
         :key="linkData.text"
         target="_blank"
+        rel="noopener noreferrer"
         :title="linkData.title"
         :href="linkData.href"
       >
