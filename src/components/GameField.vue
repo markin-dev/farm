@@ -4,6 +4,7 @@
       <FShop
         title="Animals Shop"
         :items="animals"
+        income-text="auto income"
         @shop-item-click="buyAnimal"
       />
     </div>
@@ -22,6 +23,7 @@
       <FShop
         title="Crops Shop"
         :items="crops"
+        income-text="per click"
         @shop-item-click="buyCrop"
       />
     </div>

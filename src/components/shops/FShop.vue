@@ -3,7 +3,7 @@
     <h3>{{ title }}</h3>
     <ShopItemsList
       :items="items"
-      income-text="per click"
+      :income-text="incomeText"
       @shop-item-click="emits('shop-item-click', $event)"
     />
   </div>
@@ -21,6 +21,11 @@ defineProps({
   items: {
     type: Object,
     default: () => {},
+  },
+
+  incomeText: {
+    type: String,
+    default: 'default shop name',
   },
 });
 
