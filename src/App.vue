@@ -1,6 +1,7 @@
 <template>
   <div>
     <FHeader />
+    <ModalsContainer />
 
     <div class="container">
       <FloatTextOverlay />
@@ -25,6 +26,7 @@
 import { ref, onMounted } from 'vue';
 import useStore from '@/store/useStore';
 import FHeader from '@/components/FHeader.vue';
+import ModalsContainer from '@/components/modals/ModalsContainer.vue';
 import FloatTextOverlay from '@/components/floatText/FloatTextOverlay.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';

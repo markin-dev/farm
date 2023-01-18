@@ -11,28 +11,19 @@
         <FLink
           class="actions__item"
           text="About"
-          @click="openModal"
+          @click="openAboutModal"
         />
       </div>
     </div>
-    <AboutModal
-      :is-open="isOpen"
-      @close="closeModal"
-    />
   </div>
 </template>
 
 <script setup>
 import FLink from '@/components/FLink.vue';
-import AboutModal from '@/components/modals/AboutModal.vue';
-import useShowHide from '@/composables/useShowHide';
 import { save } from '@/store/saveLoad';
+import useModals from '@/components/modals/useModals';
 
-const {
-  isShowed: isOpen,
-  show: openModal,
-  hide: closeModal,
-} = useShowHide();
+const { openAboutModal } = useModals();
 </script>
 
 <style lang="scss" scoped>
