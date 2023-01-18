@@ -1,7 +1,6 @@
 import AES from 'crypto-js/aes';
 import Utf8 from 'crypto-js/enc-utf8';
 import getSecretKey from '@/utils/getSecretKey';
-
 import useStore from '@/store/useStore';
 
 const { store, eventBus, initialLoadData } = useStore();

@@ -33,9 +33,11 @@ import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
 import { clearSave } from '@/store/saveLoad';
 import HoldButton from '@/components/HoldButton.vue';
+import useModals from '@/components/modals/useModals';
 
 const isDevPanelShowed = ref(false);
 const store = useStore();
+const { openHelpModal } = useModals();
 
 function handleKeydown(event) {
   if (event.code === 'KeyD' && event.shiftKey) {
@@ -44,6 +46,14 @@ function handleKeydown(event) {
 }
 
 onMounted(() => {
+  const OLD_USER_KEY = 'IS_OLD_USER';
+  const isOldUser = localStorage.getItem(OLD_USER_KEY);
+
+  if (!isOldUser) {
+    openHelpModal();
+    localStorage.setItem(OLD_USER_KEY, true);
+  }
+
   document.addEventListener('keydown', handleKeydown);
 });
 </script>
