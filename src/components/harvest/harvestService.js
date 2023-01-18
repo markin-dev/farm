@@ -89,7 +89,7 @@ function renderIncomeFloatText(event, harvestRarityItem) {
 export default (event) => {
   const harvestRarityItem = getHarvestRarityItem();
 
-  harvestAction(harvestRarityItem.multiplier);
+  harvestAction(incomePerClick.value * harvestRarityItem.multiplier);
   addSubstrate();
   renderIncomeFloatText(event, harvestRarityItem);
 };
