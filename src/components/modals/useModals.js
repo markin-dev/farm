@@ -6,11 +6,20 @@ const {
   hide: closeAboutModal,
 } = useShowHide();
 
+const {
+  isShowed: isHelpModalShown,
+  show: openHelpModal,
+  hide: closeHelpModal,
+} = useShowHide();
+
 function useModals() {
   return {
     isAboutModalShown,
     openAboutModal,
     closeAboutModal,
+    isHelpModalShown,
+    openHelpModal,
+    closeHelpModal,
   };
 }
 

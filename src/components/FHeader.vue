@@ -10,6 +10,11 @@
         />
         <FLink
           class="actions__item"
+          text="Help"
+          @click="openHelpModal"
+        />
+        <FLink
+          class="actions__item"
           text="About"
           @click="openAboutModal"
         />
@@ -23,7 +28,10 @@ import FLink from '@/components/FLink.vue';
 import { save } from '@/store/saveLoad';
 import useModals from '@/components/modals/useModals';
 
-const { openAboutModal } = useModals();
+const {
+  openAboutModal,
+  openHelpModal,
+} = useModals();
 </script>
 
 <style lang="scss" scoped>
