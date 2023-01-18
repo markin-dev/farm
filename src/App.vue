@@ -46,7 +46,7 @@ function handleKeydown(event) {
 }
 
 onMounted(() => {
-  const OLD_USER_KEY = 'IS_OLD_USER';
+  const OLD_USER_KEY = 'FARM_IS_OLD_USER';
   const isOldUser = localStorage.getItem(OLD_USER_KEY);
 
   if (!isOldUser) {

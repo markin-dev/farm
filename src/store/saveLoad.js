@@ -4,7 +4,7 @@ import getSecretKey from '@/utils/getSecretKey';
 import useStore from '@/store/useStore';
 
 const { store, eventBus, initialLoadData } = useStore();
-const STORAGE_KEY = 'farmSave';
+const STORAGE_KEY = 'FARM_SAVE';
 const SECRET_KEY = getSecretKey();
 const AUTOSAVE_DELAY_MS = 10000;
 
