@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import useStore from '@/store/useStore';
 import FHeader from '@/components/FHeader.vue';
 import ModalsContainer from '@/components/modals/ModalsContainer.vue';
@@ -31,19 +31,29 @@ import FloatTextOverlay from '@/components/floatText/FloatTextOverlay.vue';
 import GameField from '@/components/GameField.vue';
 import DevPanel from '@/components/devPanel/DevPanel.vue';
 import SavingStatusController from '@/components/SavingStatusController.vue';
-import { clearSave } from '@/store/saveLoad';
+import { clearSave, save } from '@/store/saveLoad';
 import HoldButton from '@/components/HoldButton.vue';
 import useModals from '@/components/modals/useModals';
+import { stopGameLoop, startGameLoop } from './store/gameLoop';
 
 const isDevPanelShowed = ref(false);
-const store = useStore();
-const { openHelpModal } = useModals();
+const { store, totalMoney, setGameCompletionFlag } = useStore();
+const { openHelpModal, openCongratulationsModal } = useModals();
 
 function handleKeydown(event) {
   if (event.code === 'KeyD' && event.shiftKey) {
     isDevPanelShowed.value = !isDevPanelShowed.value;
   }
 }
+
+watch(totalMoney, (newValue) => {
+  if (newValue >= 1000000000) {
+    setGameCompletionFlag(true);
+    openCongratulationsModal();
+    save();
+    stopGameLoop();
+  }
+});
 
 onMounted(() => {
   const OLD_USER_KEY = 'FARM_IS_OLD_USER';
@@ -55,6 +65,8 @@ onMounted(() => {
   }
 
   document.addEventListener('keydown', handleKeydown);
+
+  startGameLoop();
 });
 </script>
 

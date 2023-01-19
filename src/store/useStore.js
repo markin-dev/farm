@@ -53,6 +53,10 @@ function useStore() {
     cropItem.price = Math.round(cropItem.price * 1.4);
   }
 
+  function setGameCompletionFlag(value) {
+    store.value.isGameCompleted = value;
+  }
+
   return {
     store: computed(() => store.value),
     money: computed(() => store.value.money),
@@ -62,6 +66,7 @@ function useStore() {
     eventBus: computed(() => store.value.eventBus),
     animals: computed(() => store.value.animals),
     crops: computed(() => store.value.crops),
+    isGameCompleted: computed(() => store.value.isGameCompleted),
     initialLoadData,
     addMoney,
     subtractMoney,
@@ -71,6 +76,7 @@ function useStore() {
     addCrops,
     increaseAnimalPrice,
     increaseCropPrice,
+    setGameCompletionFlag,
   };
 }
 

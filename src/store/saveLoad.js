@@ -6,7 +6,8 @@ import useStore from '@/store/useStore';
 const { store, eventBus, initialLoadData } = useStore();
 const STORAGE_KEY = 'FARM_SAVE';
 const SECRET_KEY = getSecretKey();
-const AUTOSAVE_DELAY_MS = 10000;
+const AUTOSAVE_DELAY_MS = 500;
+let autosaveInterval;
 
 export const save = () => {
   const stringifiedState = JSON.stringify(store.value);
@@ -35,9 +36,13 @@ export const load = () => {
 };
 
 export const startAutosave = () => {
-  setInterval(() => {
+  autosaveInterval = setInterval(() => {
     save();
   }, AUTOSAVE_DELAY_MS);
+};
+
+export const stopAutosave = () => {
+  clearInterval(autosaveInterval);
 };
 
 export const clearSave = () => {

@@ -7,6 +7,7 @@ const store = ref({
   incomePerClick: 1,
   autoIncome: 0,
   eventBus: mitt(),
+  isGameCompleted: false,
   crops: [
     {
       id: 0,
