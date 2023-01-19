@@ -39,6 +39,7 @@ import { stopGameLoop, startGameLoop } from './store/gameLoop';
 const isDevPanelShowed = ref(false);
 const { store, totalMoney, setGameCompletionFlag } = useStore();
 const { openHelpModal, openCongratulationsModal } = useModals();
+const TOTAL_MONEY_GOAL = 1000000000;
 
 function handleKeydown(event) {
   if (event.code === 'KeyD' && event.shiftKey) {
@@ -47,7 +48,7 @@ function handleKeydown(event) {
 }
 
 watch(totalMoney, (newValue) => {
-  if (newValue >= 1000000000) {
+  if (newValue >= TOTAL_MONEY_GOAL) {
     setGameCompletionFlag(true);
     openCongratulationsModal();
     save();
