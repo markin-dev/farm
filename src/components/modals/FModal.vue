@@ -1,7 +1,10 @@
 <template>
   <div
     v-if="isOpen"
-    class="f-modal"
+    :class="[
+      'f-modal',
+      { 'f-modal_unclosable': unclosable },
+    ]"
   >
     <div
       class="f-modal__overlay"
@@ -12,7 +15,10 @@
           <h2 class="f-modal__title">
             {{ title }}
           </h2>
-          <IconButton @click="close" />
+          <IconButton
+            v-if="!unclosable"
+            @click="close"
+          />
         </div>
         <div class="f-modal__content">
           <slot />
@@ -34,6 +40,11 @@ defineProps({
   title: {
     type: String,
     default: '',
+  },
+
+  unclosable: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -58,6 +69,12 @@ function close() {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     cursor: pointer;
+  }
+
+  &_unclosable {
+    .f-modal__overlay {
+      cursor: auto;
+    }
   }
 
   &__body {

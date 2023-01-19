@@ -10,6 +10,7 @@
     />
     <CongratulationsModal
       :is-open="isCongratulationsModalShown"
+      unclosable
     />
   </div>
 </template>
