@@ -6,7 +6,7 @@ import useStore from '@/store/useStore';
 const { store, eventBus, initialLoadData } = useStore();
 const STORAGE_KEY = 'FARM_SAVE';
 const SECRET_KEY = getSecretKey();
-const AUTOSAVE_DELAY_MS = 500;
+const AUTOSAVE_DELAY_MS = 10000;
 let autosaveInterval;
 
 export const save = () => {
