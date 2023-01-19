@@ -12,6 +12,12 @@ const {
   hide: closeHelpModal,
 } = useShowHide();
 
+const {
+  isShowed: isCongratulationsModalShown,
+  show: openCongratulationsModal,
+  hide: closeCongratulationsModal,
+} = useShowHide();
+
 function useModals() {
   return {
     isAboutModalShown,
@@ -20,6 +26,9 @@ function useModals() {
     isHelpModalShown,
     openHelpModal,
     closeHelpModal,
+    isCongratulationsModalShown,
+    openCongratulationsModal,
+    closeCongratulationsModal,
   };
 }
 
