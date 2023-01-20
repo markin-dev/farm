@@ -10,6 +10,14 @@ module.exports = {
     'linebreak-style': 0,
     'vuejs-accessibility/click-events-have-key-events': 'off',
     'vuejs-accessibility/mouse-events-have-key-events': 'off',
+    'vue/max-attributes-per-line': ['error', {
+      singleline: {
+        max: 1,
+      },
+      multiline: {
+        max: 1,
+      },
+    }],
   },
   parserOptions: {
     ecmaVersion: 2020,
