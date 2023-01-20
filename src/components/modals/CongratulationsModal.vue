@@ -11,7 +11,7 @@
           aria-label="Wash your hands"
         >
           <span
-            v-for="char in ANIMATED_TEXT.split('')"
+            v-for="char in animatedText.split('')"
             :key="`${char}-${Math.random()}`"
           >
             {{ char }}
@@ -30,10 +30,14 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import FireworkWrapper from '@/components/modals/FireworkWrapper.vue';
 import { clearSave } from '@/store/saveLoad';
+import formatMoney from '@/utils/formatMoney';
+import useStore from '@/store/useStore';
 
-const ANIMATED_TEXT = 'You are the best farmer in the world!';
+const { totalMoney } = useStore();
+const animatedText = computed(() => `Congratulations! You earned ${formatMoney(totalMoney.value)} and became the best farmer in the world!`);
 
 defineProps({
   isOpen: {
