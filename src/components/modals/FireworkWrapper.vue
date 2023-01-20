@@ -1,11 +1,13 @@
 <template>
   <div class="firework-wrapper">
-    <slot />
     <div
       v-for="i in 3"
       :key="`${i}-${Math.random()}`"
       class="firework-wrapper__firework"
     />
+    <div class="firework-wrapper__slot">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -145,5 +147,8 @@
     top: 60%;
     animation-delay: -0.4s;
   }
+
+  &__slot {
+    position: relative;  }
 }
 </style>
