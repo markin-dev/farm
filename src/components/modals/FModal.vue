@@ -78,6 +78,7 @@ function close() {
   }
 
   &__body {
+    max-width: 1000px;
     background-color: white;
     cursor: auto;
   }
