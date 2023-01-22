@@ -47,6 +47,15 @@ const startIdleGameLoop = () => {
   }, IDLE_GAME_LOOP_INTERVAL_MS);
 };
 
+function visibilityChangeHandler() {
+  if (document.hidden) {
+    startIdleGameLoop();
+  } else {
+    save();
+    startActiveGameLoop();
+  }
+}
+
 export const startGameLoop = () => {
   load();
 
@@ -57,17 +66,11 @@ export const startGameLoop = () => {
   startAutosave();
   startActiveGameLoop();
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      startIdleGameLoop();
-    } else {
-      save();
-      startActiveGameLoop();
-    }
-  });
+  document.addEventListener('visibilitychange', visibilityChangeHandler);
 };
 
 export const stopGameLoop = () => {
   stopAutosave();
+  document.removeEventListener('visibilitychange', visibilityChangeHandler);
   clearInterval(mainGameInterval);
 };
