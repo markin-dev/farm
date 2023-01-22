@@ -17,13 +17,7 @@
             {{ char }}
           </span>
         </h1>
-
-        <button
-          type="button"
-          @click="clearSave"
-        >
-          restart
-        </button>
+        <RestartButton @click="clearSave" />
       </div>
     </FireworkWrapper>
   </div>
@@ -32,6 +26,7 @@
 <script setup>
 import { computed } from 'vue';
 import FireworkWrapper from '@/components/modals/FireworkWrapper.vue';
+import RestartButton from '@/components/modals/RestartButton.vue';
 import { clearSave } from '@/store/saveLoad';
 import formatMoney from '@/utils/formatMoney';
 import useStore from '@/store/useStore';
