@@ -54,6 +54,7 @@ const emits = defineEmits(['close']);
     z-index: 1000;
 
   &__firework-wrapper {
+    padding-top: 10vmin;
     height: 100%;
     width: 100%;
   }
@@ -80,11 +81,12 @@ const emits = defineEmits(['close']);
   }
 
   &__title {
+    display: block;
+    max-width: 1000px;
     font-size: 65px;
     text-transform: uppercase;
     font-family: "Archivo Black", "Archivo", sans-serif;
     font-weight: normal;
-    display: block;
     text-align: center;
 
     span {
