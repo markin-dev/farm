@@ -1,25 +1,25 @@
 #!/usr/bin/env sh
 
-# остановить публикацию при ошибках
+# stop deploy on error
 set -e
 
-# сборка
+# build
 npm run build
 
-# переход в каталог сборки
+# change to build directory
 cd dist
 
-# если вы публикуете на пользовательский домен
+# if you are publishing to a custom domain
 # echo 'www.example.com' > CNAME
 
 git init
 git add -A
 git commit -m 'deploy'
 
-# если вы публикуете по адресу https://<USERNAME>.github.io
+# if you publish at https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
-# если вы публикуете по адресу https://<USERNAME>.github.io/<REPO>
+# if you publish at https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:markin-dev/farm.git master:gh-pages
 
 cd -
