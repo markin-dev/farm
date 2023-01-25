@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header__content">
-      <h1>Farm</h1>
+      <h1>Farm Clicker</h1>
       <div class="actions">
         <FLink
           class="actions__item"
