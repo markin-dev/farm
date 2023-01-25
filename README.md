@@ -1,24 +1,7 @@
-# farm
+# Farm Clicker
 
-## Project setup
-```
-yarn install
-```
+This is a simple farm themed clicker game based on Vue 3.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Env
+You must provide a secret key to encrypt your saves, otherwise the insecure default key will be
+used. See env.exmaple for details.
