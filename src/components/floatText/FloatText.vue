@@ -9,6 +9,7 @@
         `float-text_${type}`,
         `global__text-color_${type}`,
       ]"
+      :style="transitionStyle"
     >
       {{ text }}
     </span>
@@ -16,7 +17,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 
 const props = defineProps({
   id: {
@@ -33,15 +34,20 @@ const props = defineProps({
     type: String,
     default: 'common',
   },
+
+  animationDurationMs: {
+    type: Number,
+    default: 600,
+  },
 });
 const emits = defineEmits(['animation-end']);
+const transitionStyle = computed(() => `transition: all ${props.animationDurationMs / 1000}s`);
 
 onMounted(() => {
   setTimeout(() => {
     emits('animation-end', props.id);
-  }, 600);
+  }, props.animationDurationMs);
 });
-
 </script>
 
 <style lang="scss" scoped>

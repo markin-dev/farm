@@ -11,22 +11,27 @@ const harvestRarities = [
   {
     multiplier: 1,
     type: floatTextTypes.COMMON,
+    animationDurationMs: 600,
   },
   {
     multiplier: 2,
     type: floatTextTypes.UNCOMMON,
+    animationDurationMs: 1200,
   },
   {
     multiplier: 5,
     type: floatTextTypes.RARE,
+    animationDurationMs: 1800,
   },
   {
     multiplier: 20,
     type: floatTextTypes.EPIC,
+    animationDurationMs: 2400,
   },
   {
     multiplier: 100,
     type: floatTextTypes.LEGENDARY,
+    animationDurationMs: 3000,
   },
 ];
 
@@ -73,7 +78,7 @@ const indentsForFloatText = {
 };
 
 function renderIncomeFloatText(event, harvestRarityItem) {
-  const { multiplier, type } = harvestRarityItem;
+  const { multiplier, type, animationDurationMs } = harvestRarityItem;
   const value = `+${formatMoney(incomePerClick.value * multiplier)}`;
 
   addFloatTextItem({
@@ -83,6 +88,7 @@ function renderIncomeFloatText(event, harvestRarityItem) {
       y: event.pageY - indentsForFloatText[type].y,
     },
     type,
+    animationDurationMs,
   });
 }
 

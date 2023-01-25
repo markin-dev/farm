@@ -9,6 +9,7 @@ function useFloatText() {
       value: item.value || 'default text',
       coords: item.coords,
       type: item.type,
+      animationDurationMs: item.animationDurationMs,
     });
   }
 

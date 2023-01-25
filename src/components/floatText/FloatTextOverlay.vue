@@ -9,6 +9,7 @@
         :style="getFloatTextStyle(item)"
         :text="item.value"
         :type="item.type"
+        :animation-duration-ms="item.animationDurationMs"
         @animation-end="removeFloatTextItem"
       />
     </div>
