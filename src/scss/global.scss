@@ -29,3 +29,27 @@ body * {
     }
   }
 }
+
+.global {
+  &__text-color {
+    &_common {
+      color: $gray-800;
+    }
+
+    &_uncommon {
+      color: $green-500;
+    }
+
+    &_rare {
+      color: $blue-500;
+    }
+
+    &_epic {
+      color: $purple-500;
+    }
+
+    &_legendary {
+      color: $yellow-600;
+    }
+  }
+}

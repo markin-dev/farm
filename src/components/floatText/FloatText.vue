@@ -7,6 +7,7 @@
       :class="[
         'float-text',
         `float-text_${type}`,
+        `global__text-color_${type}`,
       ]"
     >
       {{ text }}
@@ -47,7 +48,6 @@ onMounted(() => {
 .float-text {
   pointer-events: none;
   user-select: none;
-  transition: all .6s;
   box-sizing: border-box;
 
   &_common {
@@ -56,22 +56,18 @@ onMounted(() => {
 
   &_uncommon {
     font-size: 18px;
-    color: $green-500;
   }
 
   &_rare {
     font-size: 20px;
-    color: $blue-500;
   }
 
   &_epic {
     font-size: 22px;
-    color: $purple-500;
   }
 
   &_legendary {
     font-size: 24px;
-    color: $yellow-600;
   }
 
   &_auto-income {
