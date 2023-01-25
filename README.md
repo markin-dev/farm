@@ -6,7 +6,7 @@ This is a simple farm themed clicker game based on Vue 3.
 To start the dev server use the command `npm run serve`.
 
 ### Deploy
-The project deploys on GitHub Pages and is available at https://github.com/markin-dev/farm.
+The project deploys on GitHub Pages and is available at https://markin-dev.github.io/farm/.
 For deployment, script deploy.sh from the root directory is used. 
 
 ### Env
