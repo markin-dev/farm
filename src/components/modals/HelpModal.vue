@@ -8,7 +8,7 @@
     <div class="help-modal__content">
       <p>This is a simple farm themed clicker game.</p>
       <p>
-        Your goal is to reach a total farm cost of $10,000,000,000. You can buy crops to increase
+        Your goal is to reach a total farm cost of $10,000,000. You can buy crops to increase
         income per click or animals to increase auto income.
       </p>
       <p>
