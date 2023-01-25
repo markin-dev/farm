@@ -5,7 +5,7 @@
     title="Farm"
     @close="emits('close')"
   >
-    <p>Simple farming clicker based on Vue</p>
+    <p>Version 1.0.0</p>
     <a
       href="https://github.com/markin-dev/farm"
       target="_blank"
