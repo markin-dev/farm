@@ -88,6 +88,7 @@ const emits = defineEmits(['close']);
     font-family: "Archivo Black", "Archivo", sans-serif;
     font-weight: normal;
     text-align: center;
+    user-select: none;
 
     span {
       position: relative;
